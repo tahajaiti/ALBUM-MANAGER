@@ -47,7 +47,7 @@ if (registerForm) {
                 try {
                     const response = yield axios.post("index.php?action=register", dataVar);
                     if (response.data.success) {
-                        console.log(response.data);
+                        showAlert(response.data.message);
                     }
                 }
                 catch (err) {

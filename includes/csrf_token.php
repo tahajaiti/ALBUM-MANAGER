@@ -11,4 +11,3 @@ function generateCSRFToken() {
 
 $csrf_token = generateCSRFToken();
 
-echo ''. $csrf_token .'';

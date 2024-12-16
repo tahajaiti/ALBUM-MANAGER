@@ -54,7 +54,7 @@ if (registerForm) {
         const response = await axios.post<RegisterResponse>("index.php?action=register", dataVar);
 
         if (response.data.success) {
-          console.log(response.data);
+          showAlert(response.data.message);
         }
       } catch (err) {
         console.error("error:", err);

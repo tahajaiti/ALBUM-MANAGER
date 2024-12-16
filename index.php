@@ -1,11 +1,12 @@
 <?php
 include_once './includes/helpers.php';
 include_once './includes/db.php';
+include_once './includes/csrf_token.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'register') {
-    include_once "actions/register.php";
-    exit();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
+    include_once "actions/". $_GET["action"] ."_action.php";
 }
+
 
 ?>
 

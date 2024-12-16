@@ -1,6 +1,5 @@
 <?php 
 
-session_start();
 
 if (!isset($_SESSION['token'])) {
     echo json_encode([
@@ -9,6 +8,7 @@ if (!isset($_SESSION['token'])) {
     ]);
     return;
 }
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
@@ -23,8 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
             return;
         }
 
-        unset($_SESSION['csrf_token']);
+        unset($_SESSION['token']);
 
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'User registered successfully!'
+        ]);
+
+        exit();
     }
 
     
