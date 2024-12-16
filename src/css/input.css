@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input-field {
+  @apply text-black bg-dark_purple-600 border-b-2 border-dark_purple-500 px-3 py-2 rounded-sm;
+}
