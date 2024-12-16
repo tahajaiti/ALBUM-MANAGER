@@ -600,6 +600,14 @@ video {
   justify-content: center;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
 .rounded-sm {
   border-radius: 0.125rem;
 }
