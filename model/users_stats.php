@@ -2,7 +2,7 @@
 session_start();
 header("Content-Type: application/json");
 
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 1) {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
     http_response_code(403);
     echo json_encode(["error" => "Unauthorized"]);
     exit();
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 1) {
 require_once '../includes/db.php';
 
 try {
-    $newQuery = "SELECT COUNT(*) AS new_users FROM users WHERE DATE(created_at) = CURDATE();";
+    $newQuery = "SELECT COUNT(*) AS new_users FROM users WHERE DATE(created_at) = CURRENT_DATE;";
 
     $stmtNew = $pdo->prepare($newQuery);
     $stmtNew->execute();

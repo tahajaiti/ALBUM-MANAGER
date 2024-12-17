@@ -27,19 +27,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">New Users Today</h3>
-                    <p id="newUsers" class="text-4xl font-bold text-primary-500">24</p>
+                    <p id="new_users" class="text-4xl font-bold text-primary-500">24</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">Total Users</h3>
-                    <p id="totalUsers" class="text-4xl font-bold text-primary-500">1,234</p>
+                    <p id="total_users" class="text-4xl font-bold text-primary-500">1,234</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">Active Users</h3>
-                    <p id="activeUsers" class="text-4xl font-bold text-primary-500">987</p>
+                    <p id="active_users" class="text-4xl font-bold text-primary-500">987</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">Archived Users</h3>
-                    <p id="archivedUsers" class="text-4xl font-bold text-primary-500">47</p>
+                    <p id="archived_users" class="text-4xl font-bold text-primary-500">47</p>
                 </div>
             </div>
         </section>
@@ -133,4 +133,4 @@
 </div>
 
 
-<script type="module" src="./src/dashboard_stats.ts"></script>
+<script type="module" src="./dist/dashboard_stats.js"></script>
