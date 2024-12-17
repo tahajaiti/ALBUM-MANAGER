@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import showAlert from "./softAlert.js";
-const fetchData = (location) => __awaiter(void 0, void 0, void 0, function* () {
+const fetchData = (url) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield fetch(location);
+        const response = yield fetch(url);
         const data = yield response.json();
         if (response.ok) {
             return data;
@@ -19,6 +19,7 @@ const fetchData = (location) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         console.error('Error', err);
         showAlert('Error fetching dashboard stats');
+        return null;
     }
 });
 export default fetchData;

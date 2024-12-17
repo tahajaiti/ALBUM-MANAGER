@@ -1,16 +1,10 @@
 import showAlert from "./softAlert.js";
 
-interface stats {
-    new_users: number,
-    total_users: number,
-    active_users: number,
-    archived_users: number,
-}
 
-const fetchData = async (location: string) => {
+const fetchData = async (url: string) => {
     try {
-        const response = await fetch(location);
-        const data: stats = await response.json();
+        const response = await fetch(url);
+        const data: unknown = await response.json();
 
         if (response.ok) {
             return data;
@@ -19,6 +13,7 @@ const fetchData = async (location: string) => {
     } catch(err) {
         console.error('Error', err);
         showAlert('Error fetching dashboard stats');
+        return null;
     }
 }
 
