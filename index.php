@@ -37,10 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
 
     <?php
 
-    // if (isset($_GET["action"]) && !empty($_GET["action"])) {
-    //     $action = $_GET["action"];
-    //     include_once "actions/" . $action . ".php";
-    // }
+    if (isset($_GET["view"]) && !empty($_GET["view"])) {
+        $view = $_GET["view"];
+        include_once "views/" . $view . "_view.php";
+    } else {
+        include_once './views/home_view.php';
+    }
 
     
     include_once "./views/register.php";

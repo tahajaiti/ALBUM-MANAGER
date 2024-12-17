@@ -19,7 +19,7 @@ if (registerForm) {
     const name = formData.get("registerName") as string;
     const email = formData.get("registerMail") as string;
     const password = formData.get("registerPass") as string;
-    const token = formData.get("token");
+    const token = formData.get("token") as string;
 
     let Valid: boolean = true;
 

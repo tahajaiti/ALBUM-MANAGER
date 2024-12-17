@@ -1,5 +1,6 @@
 <?php 
 
+include_once './includes/slug_gen.php';
 
 if (!isset($_SESSION['token'])) {
     echo json_encode([
@@ -54,17 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 
         $hashPass = password_hash($password, PASSWORD_BCRYPT);
 
+        $slug = genSlug($pdo, 'users', 'slug', $name);
+
         try {
-            $stmt = $pdo->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+            $stmt = $pdo->prepare('INSERT INTO users (name, email, password, slug) VALUES (:name, :email, :password, :slug)');
             $stmt->execute([
                 ':name' => $name,
                 ':email' => $email,
                 ':password' => $hashPass,
+                ':slug' => $slug
             ]);
 
             echo json_encode([
                 'success' => true,
-                'message' => 'User registered successfuly!'
+                'message' => 'L7wa user dkhel data!'
             ]);
         } catch (PDOException $e) {
             echo json_encode([

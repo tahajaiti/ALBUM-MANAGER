@@ -13,6 +13,6 @@
             <button type="submit" class="w-full btn">Sign up</button>
         </form>
 
-        <a href="#" class="text-sm text-teal-400 hover:text-teal-300 transition duration-200">Login?</a>
+        <a href="?view=login" class="text-sm text-teal-400 hover:text-teal-300 transition duration-200">Login?</a>
     </div>
 </section>
