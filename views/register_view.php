@@ -1,3 +1,10 @@
+<?php
+    if (isset($_SESSION['user_id'])) {
+        header("Location: index.php");
+        exit();
+    }
+?>
+
 <section class="w-screen h-screen bg-transparent flex justify-center items-center">
     <div class="flex flex-col justify-center items-center bg-gray-900 p-8 rounded-sm shadow-lg w-full max-w-md">
         <h2 class="text-3xl font-bold mb-6 text-white text-center">Sign Up</h2>
@@ -35,7 +42,7 @@
             </div>
             <button
                 type="submit"
-                class="w-full bg-red-600 text-white py-2 px-4 rounded-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                class="sub_btn">
                 Sign Up
             </button>
         </form>

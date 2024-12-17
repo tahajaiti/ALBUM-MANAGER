@@ -7,20 +7,30 @@
         </div>
         <nav>
             <ul class="flex space-x-4">
-                <li>
-                    <a
-                        href="index.php?view=register"
-                        class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors">
-                        Register
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="index.php?view=login"
-                        class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-md transition-colors">
-                        Login
-                    </a>
-                </li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li>
+                        <a
+                            href="index.php?action=logout"
+                            class="btn_black">
+                            Log out
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a
+                            href="index.php?view=register"
+                            class="btn_red">
+                            Sign up
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="index.php?view=login"
+                            class="btn_black">
+                            Log in
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>

@@ -6,6 +6,14 @@
   @apply mt-1 block w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-sm text-white focus:outline-none focus:ring-2 focus:ring-red-500;
 }
 
-.btn {
-  @apply bg-teal-500 py-2 rounded-sm text-white hover:bg-teal-600 transition duration-200;
+.btn_red {
+  @apply bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-sm transition-all;
+}
+
+.btn_black {
+  @apply bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-sm transition-colors;
+}
+
+.sub_btn {
+  @apply w-full bg-red-600 text-white py-2 px-4 rounded-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900;
 }

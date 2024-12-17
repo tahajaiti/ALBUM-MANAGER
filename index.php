@@ -3,7 +3,7 @@ include_once './includes/helpers.php';
 include_once './includes/db.php';
 include_once './includes/csrf_token.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
+if (isset($_GET['action']) && !empty($_GET['action'])) {
     include_once "actions/". $_GET["action"] ."_action.php";
 }
 
@@ -27,10 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
 
 <body class="font-pop text-white bg-black">
 
-    <div id="msgContainer" class="hidden bg-black/50 items-center justify-center h-screen w-screen backdrop-blur-lg fixed">
-        <div class="bg-white rounded-sm gap-4 w-fit h-fit p-5 flex flex-col justify-center items-center ">
+    <div id="msgContainer" class="hidden bg-white/50 items-center justify-center h-screen w-screen backdrop-blur-lg fixed">
+        <div class="bg-black rounded-sm gap-4 w-fit h-fit p-5 flex flex-col justify-center items-center ">
             <p id="msgContent">Message</p>
-            <button id="closeMsg" class="btn px-5">Close</button>
+            <button id="closeMsg" class="btn_red">Close</button>
         </div>
     </div>
 
