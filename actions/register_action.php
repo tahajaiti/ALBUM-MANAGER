@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once './includes/slug_gen.php';
 
@@ -12,8 +12,8 @@ if (!isset($_SESSION['token'])) {
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
-    if (isset($_GET['action']) && $_GET['action'] === 'register'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_GET['action']) && $_GET['action'] === 'register') {
         $data = json_decode(file_get_contents('php://input'), true);
 
         if (!isset($data['token']) || $data['token'] !== $_SESSION['token']) {
@@ -23,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
             ]);
             exit;
         }
-
-        unset($_SESSION['token']);
 
         $name = htmlspecialchars(trim($data['registerName']), ENT_QUOTES, 'UTF-8');
         $email = htmlspecialchars(trim($data['registerMail']), ENT_QUOTES, 'UTF-8');
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
             $errs[] = 'Enter a valid email address';
         }
 
-        if (!preg_match('/^.{8,}$/', $password)){
+        if (!preg_match('/^.{8,}$/', $password)) {
             $errs[] = 'Please enter a password thats 8 characters long or more';
         }
 
@@ -54,17 +52,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
         }
 
         $hashPass = password_hash($password, PASSWORD_BCRYPT);
-
         $slug = genSlug($pdo, 'users', 'slug', $name);
 
         try {
-            $stmt = $pdo->prepare('INSERT INTO users (name, email, password, slug) VALUES (:name, :email, :password, :slug)');
-            $stmt->execute([
-                ':name' => $name,
-                ':email' => $email,
-                ':password' => $hashPass,
-                ':slug' => $slug
-            ]);
+
+            $stmt = $pdo->query('SELECT COUNT(*) FROM users');
+            $userCount = $stmt->fetchColumn();
+
+            $role_id = ($userCount == 0) ? 1 : null;
+
+            if ($role_id) {
+                $stmt = $pdo->prepare('INSERT INTO users (role_id, name, email, password, slug) VALUES (:role_id, :name, :email, :password, :slug)');
+                $stmt->execute([
+                    ':role_id' => $role_id,
+                    ':name' => $name,
+                    ':email' => $email,
+                    ':password' => $hashPass,
+                    ':slug' => $slug,
+                ]);
+            } else {
+                $stmt = $pdo->prepare('INSERT INTO users (name, email, password, slug) VALUES (:name, :email, :password, :slug)');
+                $stmt->execute([
+                    ':name' => $name,
+                    ':email' => $email,
+                    ':password' => $hashPass,
+                    ':slug' => $slug
+                ]);
+            }
+
+            unset($_SESSION['token']);
 
             echo json_encode([
                 'success' => true,
@@ -73,15 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
         } catch (PDOException $e) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Registration failed.'.$e->getMessage(),
+                'message' => 'Registration failed.' . $e->getMessage(),
                 'error' => $e->getMessage()
             ]);
         }
 
-        
-
         exit;
     }
-
-    
 }
