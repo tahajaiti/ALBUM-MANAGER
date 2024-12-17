@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 
         unset($_SESSION['token']);
 
-        $name = trim($data['registerName']);
-        $email = trim($data['registerMail']);
-        $password = trim($data['registerPass']);
+        $name = htmlspecialchars(trim($data['registerName']), ENT_QUOTES, 'UTF-8');
+        $email = htmlspecialchars(trim($data['registerMail']), ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars(trim($data['registerPass']), ENT_QUOTES, 'UTF-8');
 
         $errs = [];
 
