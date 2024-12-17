@@ -45,14 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
     }
 
     
-    include_once "./views/register.php";
     
 
     ?>
 
 
 
-    <script type="module" src="./dist/script.js"></script>
+    <script type="module" src="./dist/registerHandler.js"></script>
+    <script type="module" src="./dist/loginHandler.js"></script>
 </body>
 
 </html>

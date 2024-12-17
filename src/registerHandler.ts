@@ -1,6 +1,6 @@
 import showAlert from "./softAlert.js";
 
-interface RegisterResponse {
+interface response {
   success: boolean;
   message: string;
 }
@@ -51,10 +51,11 @@ if (registerForm) {
       };
 
       try {
-        const response = await axios.post<RegisterResponse>("index.php?action=register", dataVar);
+        const response = await axios.post<response>("index.php?action=register", dataVar);
 
         if (response.data.success) {
           showAlert(response.data.message);
+          window.location.href = 'index.php';
         } else {
             console.error(response.data.message);
             showAlert(response.data.message || 'Registration failed');

@@ -7,7 +7,7 @@ if (!isset($_SESSION['token'])) {
         'success' => false,
         'message' => 'No token in session.'
     ]);
-    exit();
+    exit;
 }
 
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
                 'success' => false,
                 'message' => 'Invalid token, please refresh the page'
             ]);
-            exit();
+            exit;
         }
 
         unset($_SESSION['token']);
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
                 'message' => 'Validation errors.',
                 'errors' => $errs
             ]);
-            exit();
+            exit;
         }
 
         $hashPass = password_hash($password, PASSWORD_BCRYPT);
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 
             echo json_encode([
                 'success' => true,
-                'message' => 'L7wa user dkhel data!'
+                'message' => 'User registered sucessfuly!'
             ]);
         } catch (PDOException $e) {
             echo json_encode([
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
 
         
 
-        exit();
+        exit;
     }
 
     
