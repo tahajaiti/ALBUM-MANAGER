@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
     <title>LOGIN</title>
 </head>
 
-<body class="font-pop">
+<body class="font-pop text-white bg-black">
 
     <div id="msgContainer" class="hidden bg-black/50 items-center justify-center h-screen w-screen backdrop-blur-lg fixed">
         <div class="bg-white rounded-sm gap-4 w-fit h-fit p-5 flex flex-col justify-center items-center ">
@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
     </div>
 
     <?php
+
+    include_once 'views/header.php';
 
     if (isset($_GET["view"]) && !empty($_GET["view"])) {
         $view = $_GET["view"];
