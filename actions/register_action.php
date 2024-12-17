@@ -59,12 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->query('SELECT COUNT(*) FROM users');
             $userCount = $stmt->fetchColumn();
 
-            $role_id = ($userCount == 0) ? 1 : null;
-
-            if ($role_id) {
+            if ($userCount == 0) {
                 $stmt = $pdo->prepare('INSERT INTO users (role_id, name, email, password, slug) VALUES (:role_id, :name, :email, :password, :slug)');
                 $stmt->execute([
-                    ':role_id' => $role_id,
+                    ':role_id' => 1,
                     ':name' => $name,
                     ':email' => $email,
                     ':password' => $hashPass,
