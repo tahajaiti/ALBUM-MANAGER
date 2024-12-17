@@ -11,7 +11,7 @@ import showAlert from "./softAlert.js";
 const registerForm = document.getElementById("registerForm");
 const nameRegex = /^[A-Za-z\s]+$/;
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+const passwordRegex = /^^.{8}$/;
 if (registerForm) {
     registerForm.addEventListener("submit", function (event) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -32,11 +32,11 @@ if (registerForm) {
                 Valid = false;
                 return;
             }
-            // if (!passwordRegex.test(password)) {
-            //   showAlert("Password must be at least 8 characters long and contain both letters and numbers");
-            //   Valid = false;
-            //   return;
-            // }
+            if (!passwordRegex.test(password)) {
+                showAlert("Password must be at least 8 characters long");
+                Valid = false;
+                return;
+            }
             if (Valid) {
                 const dataVar = {
                     registerName: name,
@@ -47,6 +47,9 @@ if (registerForm) {
                 try {
                     const response = yield axios.post("index.php?action=register", dataVar);
                     if (response.data.success) {
+                        showAlert(response.data.message);
+                    }
+                    else {
                         showAlert(response.data.message);
                     }
                 }

@@ -9,7 +9,7 @@ const registerForm = document.getElementById("registerForm") as HTMLFormElement;
 
 const nameRegex = /^[A-Za-z\s]+$/;
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+const passwordRegex = /^^.{8}$/;
 
 if (registerForm) {
   registerForm.addEventListener("submit", async function (event) {
@@ -35,11 +35,11 @@ if (registerForm) {
       return;
     }
 
-    // if (!passwordRegex.test(password)) {
-    //   showAlert("Password must be at least 8 characters long and contain both letters and numbers");
-    //   Valid = false;
-    //   return;
-    // }
+    if (!passwordRegex.test(password)) {
+      showAlert("Password must be at least 8 characters long");
+      Valid = false;
+      return;
+    }
 
     if (Valid) {
 
@@ -55,6 +55,8 @@ if (registerForm) {
 
         if (response.data.success) {
           showAlert(response.data.message);
+        } else {
+            showAlert(response.data.message);
         }
       } catch (err) {
         console.error("error:", err);

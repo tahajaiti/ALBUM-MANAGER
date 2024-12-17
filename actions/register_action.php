@@ -6,7 +6,7 @@ if (!isset($_SESSION['token'])) {
         'success' => false,
         'message' => 'No token in session.'
     ]);
-    return;
+    exit();
 }
 
 
@@ -20,15 +20,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
                 'success' => false,
                 'message' => 'Invalid token, please refresh the page'
             ]);
-            return;
+            exit();
         }
 
         unset($_SESSION['token']);
 
+        $name = trim($data['registerName']);
+        $email = trim($data['registerMail']);
+        $password = trim($data['registerPass']);
+
+        $errs = [];
+
+        if (!preg_match('/^[A-Za-z\s]+$/', $name)) {
+            $errs[] = 'Name must only be letters and spaces';
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errs[] = 'Enter a valid email address';
+        }
+
+        if (!preg_match('/^.{8}$/', $password)){
+            $errs[] = 'Please enter a password thats 8 characters long or more';
+        }
 
         echo json_encode([
             'success' => true,
-            'message' => 'User registered successfully!'
+            'message' => 'L7wa'
         ]);
 
         exit();
