@@ -1,3 +1,10 @@
+<?php
+    if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
+        header("Location: index.php");
+        exit();
+    }
+?>
+
 <div class="flex h-screen">
     <!-- Sidebar -->
     <aside class="w-64 bg-gray-800">
@@ -20,19 +27,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">New Users Today</h3>
-                    <p class="text-4xl font-bold text-primary-500">24</p>
+                    <p id="newUsers" class="text-4xl font-bold text-primary-500">24</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">Total Users</h3>
-                    <p class="text-4xl font-bold text-primary-500">1,234</p>
+                    <p id="totalUsers" class="text-4xl font-bold text-primary-500">1,234</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">Active Users</h3>
-                    <p class="text-4xl font-bold text-primary-500">987</p>
+                    <p id="activeUsers" class="text-4xl font-bold text-primary-500">987</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-2">Archived Users</h3>
-                    <p class="text-4xl font-bold text-primary-500">47</p>
+                    <p id="archivedUsers" class="text-4xl font-bold text-primary-500">47</p>
                 </div>
             </div>
         </section>
@@ -124,3 +131,6 @@
         </section>
     </main>
 </div>
+
+
+<script type="module" src="./src/dashboard_stats.ts"></script>

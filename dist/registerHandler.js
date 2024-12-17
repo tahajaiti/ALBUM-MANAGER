@@ -54,7 +54,6 @@ if (registerForm) {
                     });
                     const data = yield response.json();
                     if (data.status) {
-                        showAlert(data.message);
                         window.location.href = "index.php";
                     }
                     else {

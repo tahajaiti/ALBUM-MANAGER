@@ -36,7 +36,6 @@ if (loginForm) {
                 });
                 const data = yield response.json();
                 if (data.status) {
-                    showAlert("Login successful");
                     window.location.href = "index.php";
                 }
                 else {

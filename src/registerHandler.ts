@@ -61,7 +61,6 @@ if (registerForm) {
         const data: response = await response.json();
 
         if (data.status) {
-          showAlert(data.message);
           window.location.href = "index.php";
         } else {
           console.error(data.message);

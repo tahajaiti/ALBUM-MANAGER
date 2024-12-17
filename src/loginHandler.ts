@@ -39,7 +39,6 @@ if (loginForm) {
       const data: response = await response.json();
 
       if (data.status) {
-        showAlert("Login successful");
         window.location.href = "index.php";
       } else {
         showAlert(data.message);

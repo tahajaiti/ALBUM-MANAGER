@@ -1,4 +1,4 @@
-<header class="bg-black text-white shadow-md">
+<header class=" bg-black text-white shadow-md">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center">
             <a href="index.php" class="text-2xl font-bold text-red-500 hover:text-red-400 transition-colors">
@@ -9,11 +9,13 @@
             <ul class="flex space-x-4">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li>
-                        <a
-                            href="index.php?view=dashboard"
-                            class="btn_red mr-5">
-                            DASHBOARD
-                        </a>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1):  ?>
+                            <a
+                                href="index.php?view=dashboard"
+                                class="btn_red mr-5">
+                                DASHBOARD
+                            </a>
+                        <?php endif; ?>
                         <a
                             href="index.php?action=logout"
                             class="btn_black">
