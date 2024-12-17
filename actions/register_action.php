@@ -4,7 +4,7 @@ include_once './includes/slug_gen.php';
 
 if (!isset($_SESSION['token'])) {
     echo json_encode([
-        'success' => false,
+        'status' => false,
         'message' => 'No token in session.'
     ]);
     exit;
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!isset($data['token']) || $data['token'] !== $_SESSION['token']) {
             echo json_encode([
-                'success' => false,
+                'status' => false,
                 'message' => 'Invalid token, please refresh the page'
             ]);
             exit;
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($errs)) {
             echo json_encode([
-                'success' => false,
+                'status' => false,
                 'message' => 'Validation errors.',
                 'errors' => $errs
             ]);
@@ -83,12 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['token']);
 
             echo json_encode([
-                'success' => true,
+                'status' => true,
                 'message' => 'User registered sucessfuly!'
             ]);
         } catch (PDOException $e) {
             echo json_encode([
-                'success' => false,
+                'status' => false,
                 'message' => 'Registration failed.' . $e->getMessage(),
                 'error' => $e->getMessage()
             ]);

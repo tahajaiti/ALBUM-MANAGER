@@ -4,7 +4,7 @@ include_once './includes/slug_gen.php';
 
 if (!isset($_SESSION['token'])) {
     echo json_encode([
-        'success' => false,
+        'status' => false,
         'message' => 'No token in session.'
     ]);
     exit;
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!isset($data['token']) || $data['token'] !== $_SESSION['token']) {
             echo json_encode([
-                'success' => false,
+                'status' => false,
                 'message' => 'Invalid token, please refresh the page'
             ]);
             exit;
@@ -27,12 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = trim($data['loginPass']);
 
         if (empty($email) || empty($password)) {
-            echo json_encode(['status' => 'error', 'message' => 'Email and password are required']);
+            echo json_encode(['status' => false, 'message' => 'Email and password are required']);
             exit;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid email address']);
+            echo json_encode(['status' => false, 'message' => 'Invalid email address']);
             exit;
         }
 
@@ -50,15 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 unset($_SESSION['token']);
 
-                echo json_encode(['status' => 'success', 'message' => 'Login successful']);
+                echo json_encode(['status' => true, 'message' => 'Login successful']);
                 exit;
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Invalid email or password']);
+                echo json_encode(['status' => false, 'message' => 'Invalid email or password']);
                 exit;
             }
 
         } catch (Exception $e) {
-            echo json_encode(['status' => 'error', 'message' => 'Login failed']);
+            echo json_encode(['status' => false, 'message' => 'Login failed']);
             exit;
         }
     }

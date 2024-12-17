@@ -15,7 +15,10 @@ CREATE TABLE Users (
     password TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INTEGER DEFAULT NULL,
+    updated_by INTEGER DEFAULT NULL,
     is_archived BOOLEAN DEFAULT FALSE,
+    is_accepted BOOLEAN DEFAULT FALSE,
     slug VARCHAR(255) UNIQUE,
     FOREIGN KEY (role_id) REFERENCES Roles(id)
 );
@@ -30,6 +33,8 @@ CREATE TABLE Albums (
     cover_image VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by INTEGER DEFAULT NULL,
+    updated_by INTEGER DEFAULT NULL,
     is_archived BOOLEAN DEFAULT FALSE,
     slug VARCHAR(255) UNIQUE,
     FOREIGN KEY (artist_id) REFERENCES Users(id) ON DELETE CASCADE
@@ -61,17 +66,6 @@ CREATE TABLE Album_genres (
     FOREIGN KEY (album_id) REFERENCES Albums(id) ON DELETE CASCADE,
     FOREIGN KEY (genre_id) REFERENCES Genres(id) ON DELETE CASCADE,
     UNIQUE (album_id, genre_id)
-);
-
--- Table: Admin_actions
-CREATE TABLE Admin_actions (
-    id SERIAL PRIMARY KEY,
-    admin_id INTEGER NOT NULL,
-    action TEXT NOT NULL,
-    target_id INTEGER NOT NULL,
-    target_role VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (admin_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 

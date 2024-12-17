@@ -8,37 +8,44 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import showAlert from "./softAlert.js";
-const loginForm = document.getElementById('loginForm');
+const loginForm = document.getElementById("loginForm");
 if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
+    loginForm.addEventListener("submit", function (e) {
         return __awaiter(this, void 0, void 0, function* () {
             e.preventDefault();
             const formData = new FormData(this);
-            const email = formData.get('loginMail');
-            const pass = formData.get('loginPass');
-            const token = formData.get('token');
+            const email = formData.get("loginMail");
+            const pass = formData.get("loginPass");
+            const token = formData.get("token");
             if (!email || !pass) {
                 console.log(email);
-                showAlert('Please fill both inputs for email and password');
+                showAlert("Please fill both inputs for email and password");
                 return;
             }
             try {
-                const response = yield axios.post('index.php?action=login', {
-                    loginMail: email,
-                    loginPass: pass,
-                    token: token,
+                const response = yield fetch("index.php?action=login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        loginMail: email,
+                        loginPass: pass,
+                        token: token,
+                    }),
                 });
-                if (response.data.success) {
-                    showAlert('Login sucessful');
-                    window.location.href = 'index.php';
+                const data = yield response.json();
+                if (data.status) {
+                    showAlert("Login successful");
+                    window.location.href = "index.php";
                 }
                 else {
-                    showAlert(response.data.message);
+                    showAlert(data.message);
                 }
             }
             catch (err) {
                 console.error(err);
-                showAlert('An error happened, try again');
+                showAlert("An error happened, try again");
             }
         });
     });

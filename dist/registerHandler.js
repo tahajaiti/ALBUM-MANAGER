@@ -45,18 +45,26 @@ if (registerForm) {
                     token: token,
                 };
                 try {
-                    const response = yield axios.post("index.php?action=register", dataVar);
-                    if (response.data.success) {
-                        showAlert(response.data.message);
-                        window.location.href = 'index.php';
+                    const response = yield fetch("index.php?action=register", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(dataVar),
+                    });
+                    const data = yield response.json();
+                    if (data.status) {
+                        showAlert(data.message);
+                        window.location.href = "index.php";
                     }
                     else {
-                        console.error(response.data.message);
-                        showAlert(response.data.message || 'Registration failed');
+                        console.error(data.message);
+                        showAlert(data.message || "Registration failed");
                     }
                 }
                 catch (err) {
                     console.error("error:", err);
+                    showAlert("An error occurred, please try again.");
                 }
             }
         });

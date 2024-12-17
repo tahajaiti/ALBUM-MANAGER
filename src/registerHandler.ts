@@ -1,7 +1,7 @@
 import showAlert from "./softAlert.js";
 
 interface response {
-  success: boolean;
+  status: boolean;
   message: string;
 }
 
@@ -42,7 +42,6 @@ if (registerForm) {
     }
 
     if (Valid) {
-
       const dataVar = {
         registerName: name,
         registerMail: email,
@@ -51,17 +50,26 @@ if (registerForm) {
       };
 
       try {
-        const response = await axios.post<response>("index.php?action=register", dataVar);
+        const response = await fetch("index.php?action=register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataVar),
+        });
 
-        if (response.data.success) {
-          showAlert(response.data.message);
-          window.location.href = 'index.php';
+        const data: response = await response.json();
+
+        if (data.status) {
+          showAlert(data.message);
+          window.location.href = "index.php";
         } else {
-            console.error(response.data.message);
-            showAlert(response.data.message || 'Registration failed');
+          console.error(data.message);
+          showAlert(data.message || "Registration failed");
         }
       } catch (err) {
         console.error("error:", err);
+        showAlert("An error occurred, please try again.");
       }
     }
   });
