@@ -11,7 +11,7 @@ import showAlert from "./softAlert.js";
 const registerForm = document.getElementById("registerForm");
 const nameRegex = /^[A-Za-z\s]+$/;
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passwordRegex = /^^.{8}$/;
+const passwordRegex = /^.{8,}$/;
 if (registerForm) {
     registerForm.addEventListener("submit", function (event) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -50,7 +50,8 @@ if (registerForm) {
                         showAlert(response.data.message);
                     }
                     else {
-                        showAlert(response.data.message);
+                        console.error(response.data.message);
+                        showAlert(response.data.message || 'Registration failed');
                     }
                 }
                 catch (err) {

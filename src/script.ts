@@ -9,7 +9,7 @@ const registerForm = document.getElementById("registerForm") as HTMLFormElement;
 
 const nameRegex = /^[A-Za-z\s]+$/;
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passwordRegex = /^^.{8}$/;
+const passwordRegex = /^.{8,}$/;
 
 if (registerForm) {
   registerForm.addEventListener("submit", async function (event) {
@@ -56,7 +56,8 @@ if (registerForm) {
         if (response.data.success) {
           showAlert(response.data.message);
         } else {
-            showAlert(response.data.message);
+            console.error(response.data.message);
+            showAlert(response.data.message || 'Registration failed');
         }
       } catch (err) {
         console.error("error:", err);

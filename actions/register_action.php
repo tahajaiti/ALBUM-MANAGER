@@ -39,14 +39,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ){
             $errs[] = 'Enter a valid email address';
         }
 
-        if (!preg_match('/^.{8}$/', $password)){
+        if (!preg_match('/^.{8,}$/', $password)){
             $errs[] = 'Please enter a password thats 8 characters long or more';
         }
 
-        echo json_encode([
-            'success' => true,
-            'message' => 'L7wa'
-        ]);
+        if (!empty($errs)) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Validation errors.',
+                'errors' => $errs
+            ]);
+            exit();
+        }
+
+        $hashPass = password_hash($password, PASSWORD_BCRYPT);
+
+        try {
+            $stmt = $pdo->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+            $stmt->execute([
+                ':name' => $name,
+                ':email' => $email,
+                ':password' => $hashPass,
+            ]);
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'User registered successfuly!'
+            ]);
+        } catch (PDOException $e) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Registration failed.'.$e->getMessage(),
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        
 
         exit();
     }

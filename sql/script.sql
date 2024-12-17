@@ -9,7 +9,7 @@ CREATE TABLE Roles (
 -- Table: Users
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    role_id INTEGER NOT NULL,
+    role_id INTEGER NOT NULL DEFAULT 1,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password TEXT NOT NULL,
