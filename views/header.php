@@ -10,6 +10,11 @@
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li>
                         <a
+                            href="index.php?view=dashboard"
+                            class="btn_red mr-5">
+                            DASHBOARD
+                        </a>
+                        <a
                             href="index.php?action=logout"
                             class="btn_black">
                             Log out
