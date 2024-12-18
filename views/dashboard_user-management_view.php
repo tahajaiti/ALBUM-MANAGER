@@ -29,20 +29,28 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
                 <table class="w-full">
                     <thead>
                         <tr class="bg-gray-700">
+                            <th class="px-6 py-3 text-left">ID</th>
                             <th class="px-6 py-3 text-left">Name</th>
                             <th class="px-6 py-3 text-left">Email</th>
+                            <th class="px-6 py-3 text-left">Created At</th>
+                            <th class="px-6 py-3 text-left">Updated At</th>
+                            <th class="px-6 py-3 text-left">Updated By</th>
                             <th class="px-6 py-3 text-left">Role</th>
                             <th class="px-6 py-3 text-left">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">ID</td>
                             <td class="px-6 py-4">Jane Smith</td>
                             <td class="px-6 py-4">jane@example.com</td>
-                            <td class="px-6 py-4">User</td>
+                            <td class="px-6 py-4">Created at</td>
+                            <td class="px-6 py-4">Updated at</td>
+                            <td class="px-6 py-4">Updated by</td>
+                            <td class="px-6 py-4">Role</td>
                             <td class="px-6 py-4">
                                 <button class="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
-                                <button class="bg-primary-600 text-white px-3 py-1 rounded hover:bg-primary-700">Delete</button>
+                                <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
                             </td>
                         </tr>
                         <!-- Add more rows as needed -->
@@ -50,7 +58,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
                 </table>
             </div>
         </section>
-
-       
     </main>
 </div>
+
+<script type="module" src="./dist/dashboard_users.js"></script>
