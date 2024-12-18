@@ -37,26 +37,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         try {
-            $query = 'SELECT id, role_id, email, password, slug FROM users WHERE email = :email LIMIT 1;';
+            $query = 'SELECT id, role_id, email, password, slug, is_archived, is_accepted FROM users WHERE email = :email LIMIT 1;';
 
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['role'] = $user['role_id'];
+            if ($user) {
 
-                unset($_SESSION['token']);
+                if ($user['is_archived'] || !$user['is_accepted']) {
+                    echo json_encode([
+                        'status' => true,
+                        'redirect' => 'index.php?view=pending',
+                        'message' => 'Your account is under review.'
+                    ]);
+                    exit;
+                }
 
-                echo json_encode(['status' => true, 'message' => 'Login successful']);
-                exit;
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['role'] = $user['role_id'];
+
+                    unset($_SESSION['token']);
+
+                    echo json_encode(['status' => true, 'message' => 'Login successful']);
+                    exit;
+                }
             } else {
                 echo json_encode(['status' => false, 'message' => 'Invalid email or password']);
                 exit;
             }
-
         } catch (Exception $e) {
             echo json_encode(['status' => false, 'message' => 'Login failed']);
             exit;

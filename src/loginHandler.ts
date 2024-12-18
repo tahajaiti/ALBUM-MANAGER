@@ -3,6 +3,7 @@ import showAlert from "./softAlert.js";
 interface response {
   status: boolean;
   message: string;
+  redirect: string;
 }
 
 const loginForm = document.getElementById("loginForm") as HTMLFormElement;
@@ -39,7 +40,11 @@ if (loginForm) {
       const data: response = await response.json();
 
       if (data.status) {
-        window.location.href = "index.php";
+        if (data.redirect){
+          window.location.href = data.redirect;
+        } else {
+          window.location.href = 'index.php';
+        }
       } else {
         showAlert(data.message);
       }

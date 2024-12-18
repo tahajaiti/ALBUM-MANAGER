@@ -36,7 +36,12 @@ if (loginForm) {
                 });
                 const data = yield response.json();
                 if (data.status) {
-                    window.location.href = "index.php";
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                    else {
+                        window.location.href = 'index.php';
+                    }
                 }
                 else {
                     showAlert(data.message);
