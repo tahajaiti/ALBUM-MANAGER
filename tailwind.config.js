@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       fontFamily: {
         'pop': ['Poppins', 'sans-serif'],
-      }
+      },
+      backgroundImage: {
+        'main': "url('./../assets/bg.webp')",
+      },
     },
   },
   plugins: [],
