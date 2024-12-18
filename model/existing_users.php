@@ -15,7 +15,7 @@ require_once '../includes/db.php';
 try {
     $query = "SELECT users.*, roles.role_name AS role
     FROM users
-    JOIN roles ON users.role_id = roles.id WHERE is_archived = false
+    JOIN roles ON users.role_id = roles.id WHERE is_archived = false AND is_accepted = true
     ORDER BY id ASC;
     ";
 
