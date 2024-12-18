@@ -15,11 +15,14 @@ const fetchData = (url) => __awaiter(void 0, void 0, void 0, function* () {
         if (response.ok) {
             return data;
         }
+        else {
+            throw new Error('failed to fetch data');
+        }
     }
     catch (err) {
         console.error('Error', err);
         showAlert('Error fetching dashboard stats');
-        return null;
+        throw err;
     }
 });
 export default fetchData;

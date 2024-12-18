@@ -28,20 +28,21 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
                 <table class="w-full">
                     <thead>
                         <tr class="bg-gray-700">
+                            <th class="px-6 py-3 text-left">ID</th>
                             <th class="px-6 py-3 text-left">Name</th>
                             <th class="px-6 py-3 text-left">Email</th>
                             <th class="px-6 py-3 text-left">Registration Date</th>
                             <th class="px-6 py-3 text-left">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         <tr class="border-b border-gray-700">
                             <td class="px-6 py-4">John Doe</td>
                             <td class="px-6 py-4">john@example.com</td>
                             <td class="px-6 py-4">2023-05-15</td>
                             <td class="px-6 py-4">
                                 <button class="bg-green-600 text-white px-3 py-1 rounded mr-2 hover:bg-green-700">Approve</button>
-                                <button class="bg-primary-600 text-white px-3 py-1 rounded hover:bg-primary-700">Reject</button>
+                                <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Reject</button>
                             </td>
                         </tr>
                         <!-- Add more rows as needed -->
@@ -52,3 +53,5 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
 
     </main>
 </div>
+
+<script type="module" src="./dist/dashboard_newusers.js"></script>

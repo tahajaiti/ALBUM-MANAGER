@@ -1,12 +1,15 @@
 <?php
 
-require_once '../includes/db.php';
+session_start();
+header("Content-Type: application/json");
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
     http_response_code(403);
     echo json_encode(["error" => "Unauthorized"]);
     exit();
 }
+
+require_once '../includes/db.php';
 
 
 try {

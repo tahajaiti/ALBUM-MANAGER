@@ -1,19 +1,21 @@
 import showAlert from "./softAlert.js";
 
 
-const fetchData = async (url: string) => {
+const fetchData = async<T> (url: string): Promise<T> => {
     try {
         const response = await fetch(url);
-        const data: unknown = await response.json();
+        const data: T = await response.json();
 
         if (response.ok) {
             return data;
+        } else {
+            throw new Error('failed to fetch data');
         }
 
     } catch(err) {
         console.error('Error', err);
         showAlert('Error fetching dashboard stats');
-        return null;
+        throw err;
     }
 }
 
