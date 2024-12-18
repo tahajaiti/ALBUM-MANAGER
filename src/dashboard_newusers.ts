@@ -19,7 +19,7 @@ interface User {
 const container = document.getElementById('tableBody') as HTMLTableSectionElement;
 
 
-const fetchNewUser = async () => {
+const fetchNewUsers = async () => {
     const data: User[] = await fetchData('./model/newusers_fetch.php');
 
     if (container && data) {
@@ -53,13 +53,30 @@ const fetchNewUser = async () => {
                 const userId = (e.target as HTMLButtonElement).dataset.id;
 
                 if (userId){
-                    console.log(userId);
+                    acceptUser(Number(userId));
                 }
             });
         });
         
     }
+};
+
+const acceptUser = async (id: number) => {
+    const response = await fetch('./model/accept_user.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: id }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success){
+        showAlert(result.message);
+        fetchNewUsers();
+    } else {
+        showAlert(result.error || 'An error happened.');
+    }
 
 };
 
-fetchNewUser();
+fetchNewUsers();

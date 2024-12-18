@@ -8,8 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import fetchData from "./fetch.js";
+import showAlert from "./softAlert.js";
 const container = document.getElementById('tableBody');
-const fetchNewUser = () => __awaiter(void 0, void 0, void 0, function* () {
+const fetchNewUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield fetchData('./model/newusers_fetch.php');
     if (container && data) {
         container.innerHTML = '';
@@ -35,10 +36,25 @@ const fetchNewUser = () => __awaiter(void 0, void 0, void 0, function* () {
             btn.addEventListener('click', (e) => {
                 const userId = e.target.dataset.id;
                 if (userId) {
-                    console.log(userId);
+                    acceptUser(Number(userId));
                 }
             });
         });
     }
 });
-fetchNewUser();
+const acceptUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch('./model/accept_user.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: id }),
+    });
+    const result = yield response.json();
+    if (response.ok && result.success) {
+        showAlert(result.message);
+        fetchNewUsers();
+    }
+    else {
+        showAlert(result.error || 'An error happened.');
+    }
+});
+fetchNewUsers();

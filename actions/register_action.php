@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status' => true,
                 'message' => 'User registered sucessfuly!'
             ]);
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             echo json_encode([
                 'status' => false,
                 'message' => 'Registration failed.' . $e->getMessage(),
