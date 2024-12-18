@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import fetchData from "./fetch.js";
 import showAlert from "./softAlert.js";
 const container = document.getElementById('tableBody');
+const editForm = document.getElementById('editUserForm');
+const form = document.getElementById('editForm');
 const fetchUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield fetchData('./model/existing_users.php');
     if (container && data) {
@@ -35,17 +37,12 @@ const fetchUsers = () => __awaiter(void 0, void 0, void 0, function* () {
                                     </td>
                              `;
             container.appendChild(newRow);
-        });
-        const editBtns = document.querySelectorAll('#editBtn');
-        const deleteBtns = document.querySelectorAll('#deleteBtn');
-        editBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const userId = e.target.dataset.id;
-                if (userId) {
-                    editUser(Number(userId));
-                }
+            const editBtn = newRow.querySelector('#editBtn');
+            editBtn.addEventListener('click', (e) => {
+                openEdit(user);
             });
         });
+        const deleteBtns = document.querySelectorAll('#deleteBtn');
         deleteBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const userId = e.target.dataset.id;
@@ -55,6 +52,55 @@ const fetchUsers = () => __awaiter(void 0, void 0, void 0, function* () {
             });
         });
     }
+});
+const openEdit = (user) => {
+    const closeBtn = editForm.querySelector('#closeEdit');
+    if (editForm && closeBtn) {
+        editForm.classList.remove('hidden');
+        closeBtn.addEventListener('click', () => {
+            const inputs = editForm.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input instanceof HTMLInputElement) {
+                    input.value = "";
+                }
+                else if (input instanceof HTMLSelectElement) {
+                    input.value = user.role;
+                }
+            });
+            editForm.classList.add('hidden');
+        });
+        const inputs = editForm.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            if (input instanceof HTMLInputElement) {
+                switch (input.name) {
+                    case 'editName':
+                        input.value = user.name;
+                        break;
+                    case 'editEmail':
+                        input.value = user.email;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (input instanceof HTMLSelectElement) {
+                input.value = user.role;
+            }
+        });
+    }
+};
+const nameRegex = /^[A-Za-z\s]+$/;
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+form.addEventListener('submit', function (e) {
+    return __awaiter(this, void 0, void 0, function* () {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const name = formData.get('editName');
+        const email = formData.get('editEmail');
+        const role = formData.get('editRole');
+        const id = formData.get('editId');
+        let Valid = true;
+    });
 });
 const editUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     // const response = await fetch('./model/accept_user.php', {

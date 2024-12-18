@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 1) {
     header("Location: index.php");
     exit();
 }
@@ -21,7 +21,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
 
     <!-- Main Content -->
     <main class="flex-1 p-8 overflow-y-auto">
-        
+
         <!-- User Management Section -->
         <section id="user-management" class="mb-12">
             <h2 class="text-3xl font-bold mb-6">User Management</h2>
@@ -59,6 +59,35 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] !== 1) {
             </div>
         </section>
     </main>
+</div>
+
+<div id="editUserForm" class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6">Edit User</h2>
+        <form id="editForm" for="index.php?view=dashboard_user-management&action=edit_user.php" method="post">
+            <input type="hidden" name="editId" id="editId">
+            <div class="mb-4">
+                <label for="editName" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                <input type="text" id="editName" name="editName" class="input-field">
+            </div>
+            <div class="mb-4">
+                <label for="editEmail" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                <input type="email" id="editEmail" name="editEmail" class="input-field">
+            </div>
+            <div class="mb-6">
+                <label for="editRole" class="block text-sm font-medium text-gray-400 mb-2">Role</label>
+                <select id="editRole" name="editRole" class="input-field">
+                    <option value="customer">Customer</option>
+                    <option value="artist">Artist</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div class="flex justify-end">
+                <button id="closeEdit" type="button" class="bg-gray-600 text-white px-4 py-2 rounded mr-2 hover:bg-gray-700">Cancel</button>
+                <button id="submitEdit" type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Changes</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script type="module" src="./dist/dashboard_users.js"></script>
