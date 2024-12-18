@@ -79,6 +79,8 @@ const openEdit = (user) => {
                     case 'editEmail':
                         input.value = user.email;
                         break;
+                    case 'editId':
+                        input.value = String(user.id);
                     default:
                         break;
                 }
@@ -86,6 +88,7 @@ const openEdit = (user) => {
             else if (input instanceof HTMLSelectElement) {
                 input.value = user.role;
             }
+            console.log(input.value);
         });
     }
 };
@@ -100,21 +103,53 @@ form.addEventListener('submit', function (e) {
         const role = formData.get('editRole');
         const id = formData.get('editId');
         let Valid = true;
+        if (!nameRegex.test(name)) {
+            showAlert('Name must be contain letters and spaces');
+            Valid = false;
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            showAlert('Email is invalid');
+            Valid = false;
+            return;
+        }
+        if (role !== 'admin' && role !== 'customer' && role !== 'artist') {
+            showAlert('Invalid role, try again');
+            Valid = false;
+            return;
+        }
+        if (Valid) {
+            const dataVar = {
+                id: parseInt(id),
+                name: name,
+                email: email,
+                role: role,
+            };
+            try {
+                yield editUser(dataVar);
+            }
+            catch (error) {
+                showAlert('Failed to edit user. Please try again.');
+            }
+        }
     });
 });
-const editUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    // const response = await fetch('./model/accept_user.php', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ user_id: id }),
-    // });
-    // const result = await response.json();
-    // if (response.ok && result.success){
-    //     showAlert(result.message);
-    //     fetchUsers();
-    // } else {
-    //     showAlert(result.error || 'An error happened.');
-    // }
+const editUser = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch('./model/edit_user.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    });
+    const result = yield response.json();
+    if (response.ok && result.status) {
+        editForm.classList.add('hidden');
+        showAlert(result.message);
+        fetchUsers();
+    }
+    else {
+        editForm.classList.add('hidden');
+        showAlert(result.message);
+    }
 });
 const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield fetch('./model/delete_user.php', {

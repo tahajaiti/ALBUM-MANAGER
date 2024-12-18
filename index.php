@@ -27,7 +27,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 
 <body class="font-pop text-white bg-black">
 
-    <div id="msgContainer" class="hidden bg-white/50 items-center justify-center h-screen w-screen backdrop-blur-lg fixed">
+    <div id="msgContainer" class="hidden z-50 bg-white/50 items-center justify-center h-screen w-screen backdrop-blur-lg fixed">
         <div class="bg-black rounded-sm gap-4 w-fit h-fit p-5 flex flex-col justify-center items-center ">
             <p id="msgContent">Message</p>
             <button id="closeMsg" class="btn_red">Close</button>

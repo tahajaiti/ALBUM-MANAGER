@@ -64,7 +64,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 1) {
 <div id="editUserForm" class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
     <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md">
         <h2 class="text-2xl font-bold mb-6">Edit User</h2>
-        <form id="editForm" for="index.php?view=dashboard_user-management&action=edit_user.php" method="post">
+        <form id="editForm">
             <input type="hidden" name="editId" id="editId">
             <div class="mb-4">
                 <label for="editName" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
