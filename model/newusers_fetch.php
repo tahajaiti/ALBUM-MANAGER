@@ -13,7 +13,7 @@ require_once '../includes/db.php';
 
 
 try {
-    $query = "SELECT * FROM users WHERE is_accepted = false AND is_archived = false;";
+    $query = "SELECT * FROM users WHERE is_accepted = false AND is_archived = false ORDER BY id ASC;";
 
     $stmt = $pdo->prepare($query);
     $stmt->execute();
