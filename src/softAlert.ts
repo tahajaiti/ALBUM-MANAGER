@@ -7,6 +7,10 @@ export default function showAlert(msg: string): void {
     container.classList.remove("hidden");
     content.textContent = msg;
 
+    setTimeout(() => {
+      container.classList.add("hidden");      
+    },3500)
+
     closeMsg.addEventListener("click", () => {
       container.classList.add("hidden");
     });
