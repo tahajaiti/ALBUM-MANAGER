@@ -4,7 +4,7 @@ include_once './includes/db.php';
 include_once './includes/csrf_token.php';
 
 if (isset($_GET['action']) && !empty($_GET['action'])) {
-    include_once "actions/". $_GET["action"] ."_action.php";
+    include_once "actions/" . $_GET["action"] . "_action.php";
 }
 
 
@@ -26,11 +26,10 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 </head>
 
 <body class="font-pop text-white bg-black">
-
-    <div id="msgContainer" class="hidden z-50 bg-white/50 items-center justify-center h-screen w-screen backdrop-blur-lg fixed">
-        <div class="bg-black rounded-sm gap-4 w-fit h-fit p-5 flex flex-col justify-center items-center ">
-            <p id="msgContent">Message</p>
-            <button id="closeMsg" class="btn_red">Close</button>
+    <div id="msgContainer" class="hidden fixed top-24 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+        <div class="flex justify-between items-center gap-6 w-fit h-fit px-6 py-4 rounded-md border-2 border-slate-800 bg-slate-700/80 shadow-lg text-white">
+            <p id="msgContent" class="text-sm font-medium">Your message here</p>
+            <button id="closeMsg" class="text-slate-300 hover:text-slate-100 font-bold text-lg">X</button>
         </div>
     </div>
 
@@ -45,8 +44,8 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
         include_once './views/home_view.php';
     }
 
-    
-    
+
+
 
     ?>
 
