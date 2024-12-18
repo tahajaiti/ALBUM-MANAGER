@@ -29,25 +29,20 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 1) {
                 <table class="w-full">
                     <thead>
                         <tr class="bg-gray-700">
+                            <th class="px-6 py-3 text-left">ID</th>
                             <th class="px-6 py-3 text-left">Name</th>
                             <th class="px-6 py-3 text-left">Email</th>
                             <th class="px-6 py-3 text-left">Archived Date</th>
                             <th class="px-6 py-3 text-left">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-700">
-                            <td class="px-6 py-4">Alice Johnson</td>
-                            <td class="px-6 py-4">alice@example.com</td>
-                            <td class="px-6 py-4">2023-05-10</td>
-                            <td class="px-6 py-4">
-                                <button class="bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700">Restore</button>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
+                    <tbody id="tableBody">
+                        
                     </tbody>
                 </table>
             </div>
         </section>
     </main>
 </div>
+
+<script type="module" src="./dist/dashboard_archived.js"></script>

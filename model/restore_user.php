@@ -12,7 +12,6 @@ include_once '../includes/db.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $userId = $data['user_id'];
-$adminId = $_SESSION['user_id'];
 
 if (!$userId) {
     http_response_code(400);
@@ -21,11 +20,11 @@ if (!$userId) {
 }
 
 try {
-    $query = "UPDATE users SET is_archived = true, updated_by = :adminId, updated_at = CURRENT_TIMESTAMP WHERE id = :id;";
+    $query = "UPDATE users SET is_archived = false, is_accepted = true, updated_at = CURRENT_TIMESTAMP, updated_by = :adminId WHERE id = :id;";
     $stmt = $pdo->prepare($query);
-    $stmt->execute(["adminId" => $adminId,"id"=> $userId]);
+    $stmt->execute(["adminId"=> $_SESSION['user_id'] ,"id"=> $userId]);
 
-    echo json_encode(["success"=> true, "message" => 'User archived.']);
+    echo json_encode(["success"=> true, "message" => 'User restored.']);
 
 } catch (Exception $e) {
     http_response_code(500);

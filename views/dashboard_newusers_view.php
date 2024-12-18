@@ -36,15 +36,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 1) {
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <tr class="border-b border-gray-700">
-                            <td class="px-6 py-4">John Doe</td>
-                            <td class="px-6 py-4">john@example.com</td>
-                            <td class="px-6 py-4">2023-05-15</td>
-                            <td class="px-6 py-4">
-                                <button class="bg-green-600 text-white px-3 py-1 rounded mr-2 hover:bg-green-700">Approve</button>
-                                <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Reject</button>
-                            </td>
-                        </tr>
+                        
                         <!-- Add more rows as needed -->
                     </tbody>
                 </table>

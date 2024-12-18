@@ -38,7 +38,7 @@ try {
     };
     
     $editQuery = "UPDATE users 
-                  SET name = :name, email = :email, updated_by = :adminId , role_id = :role 
+                  SET name = :name, email = :email, updated_by = :adminId, updated_at = CURRENT_TIMESTAMP , role_id = :role 
                   WHERE id=:id";
                   
     $stmt = $pdo->prepare($editQuery);

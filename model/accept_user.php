@@ -20,9 +20,9 @@ if (!$userId) {
 }
 
 try {
-    $query = "UPDATE users SET is_accepted = true WHERE id = :id;";
+    $query = "UPDATE users SET is_accepted = true, updated_by = :adminId, updated_at = CURRENT_TIMESTAMP WHERE id = :id;";
     $stmt = $pdo->prepare($query);
-    $stmt->execute(["id"=> $userId]);
+    $stmt->execute(["adminId"=> $_SESSION['user_id'], "id"=> $userId]);
 
     echo json_encode(["success"=> true, "message" => 'User accepted.']);
 

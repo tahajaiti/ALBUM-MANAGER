@@ -40,19 +40,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 1) {
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <tr class="border-b border-gray-700">
-                            <td class="px-6 py-4">ID</td>
-                            <td class="px-6 py-4">Jane Smith</td>
-                            <td class="px-6 py-4">jane@example.com</td>
-                            <td class="px-6 py-4">Created at</td>
-                            <td class="px-6 py-4">Updated at</td>
-                            <td class="px-6 py-4">Updated by</td>
-                            <td class="px-6 py-4">Role</td>
-                            <td class="px-6 py-4">
-                                <button class="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
-                                <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
-                            </td>
-                        </tr>
+                        
                         <!-- Add more rows as needed -->
                     </tbody>
                 </table>
