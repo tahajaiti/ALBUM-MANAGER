@@ -62,7 +62,7 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
     <h2 class="text-3xl font-bold text-primary-400 mb-8">Library</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- ALBUMS -->
-        <?php if (empty($album)): ?>
+        <?php if (empty($albums)): ?>
             <h2 class="text-2xl">No albums in the library.</h2>
         <?php else: ?>
             <?php foreach ($albums as $album): ?>
