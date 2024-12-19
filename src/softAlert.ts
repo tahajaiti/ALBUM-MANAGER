@@ -9,7 +9,7 @@ export default function showAlert(msg: string): void {
 
     setTimeout(() => {
       container.classList.add("hidden");      
-    },3500)
+    },5000)
 
     closeMsg.addEventListener("click", () => {
       container.classList.add("hidden");

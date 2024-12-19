@@ -10,7 +10,7 @@ $stmt = $pdo->query($query);
     <div class="max-w-2xl mx-auto bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden">
         <div class="p-8">
             <h2 class="text-3xl font-bold text-primary-400 mb-6">Upload New Album</h2>
-            <form id="uploadForm">
+            <form id="uploadForm" method="POST" enctype="multipart/form-data">
                 <div class="space-y-6">
                     <div>
                         <label for="album-title" class="block text-sm font-medium text-gray-300 mb-1">Album Title</label>

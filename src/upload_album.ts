@@ -8,32 +8,51 @@ interface Response {
 
 const form = document.getElementById("uploadForm") as HTMLFormElement;
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    if (form) {
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-    const formData = new FormData(form);
+            const formData = new FormData(form);
+            const selectedGenres = formData.getAll('genres[]');
+            const image = formData.get('file-upload') as File;
 
-    
-    try {
-        const response = await fetch("./model/upload_album.php", {
-            method: "POST",
-            body: formData,
-        });
-
-        const result: Response = await response.json();
-
-        if (result.status) {
-            showAlert(result.message);
-
-            if (result.redirect) {
-                window.location.href = result.redirect;
+            if (selectedGenres.length > 3) {
+                showAlert("You can only select up to 3 genres.");
+                return;
             }
 
-        } else {
-            showAlert(result.message);
-        }
-    } catch (err) {
-        console.error(err);
-        showAlert("Failed to upload album");
+            const type = image.type;
+
+            if (type !== 'image/jpeg' && type !== 'image/png' && type !== 'image/webp') {
+                showAlert("Please upload a valid image file (JPG, PNG, or GIF).");
+                return; 
+            }
+            
+
+            try {
+                const response = await fetch("./model/upload_album.php", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result: Response = await response.json();
+
+                if (result.status) {
+                    e.preventDefault();
+                    showAlert(result.message);
+
+                    if (result.redirect) {
+                        window.location.href = result.redirect;
+                    }
+                } else {
+                    showAlert(result.message);
+                }
+            } catch (err) {
+                e.preventDefault();
+                console.error(err);
+                showAlert("Failed to upload album");
+            }
+        });
     }
 });
