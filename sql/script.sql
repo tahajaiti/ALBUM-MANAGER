@@ -36,7 +36,6 @@ CREATE TABLE Albums (
     created_by INTEGER DEFAULT NULL,
     updated_by INTEGER DEFAULT NULL,
     is_archived BOOLEAN DEFAULT FALSE,
-    slug VARCHAR(255) UNIQUE,
     FOREIGN KEY (artist_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 

@@ -25,8 +25,8 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     <title>MEZIKKA - Your only album store</title>
 </head>
 
-<body class="font-pop text-white bg-slate-900 h-screen pt-14">
-    <div id="msgContainer" class="hidden fixed top-24 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+<body class="font-pop text-white bg-slate-900 h-screen pt-12">
+    <div id="msgContainer" class="hidden fixed top-24 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
         <div class="flex justify-between items-center gap-6 w-fit h-fit px-6 py-4 rounded-md border-2 border-slate-800 bg-slate-700/80 shadow-lg text-white">
             <p id="msgContent" class="text-sm font-medium">Your message here</p>
             <button id="closeMsg" class="text-slate-300 hover:text-slate-100 font-bold text-lg">X</button>
