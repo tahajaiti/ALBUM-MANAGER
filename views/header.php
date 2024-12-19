@@ -6,12 +6,22 @@
             </a>
         </div>
         <ul class="flex space-x-4">
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] !== 3):  ?>
+                <li><a
+                        href="index.php?view=myalbums"
+                        class="text-xl hover:text-red-500 transition-all">
+                        MY ALBUMS
+                    </a>
+                </li>
+            <?php endif; ?>
             <li><a
                     class="text-xl hover:text-red-500 transition-all"
-                    href="index.php?view=library">LIBRARY</a></li>
+                    href="index.php?view=library">LIBRARY</a>
+            </li>
             <li><a
                     class="text-xl hover:text-red-500 transition-all"
-                    href="index.php?view=about">ABOUT</a></li>
+                    href="index.php?view=about">ABOUT</a>
+            </li>
         </ul>
         <nav class="flex justify-between">
             <ul class="flex space-x-4">
