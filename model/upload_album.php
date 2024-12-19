@@ -33,6 +33,7 @@ try {
         $fileTmpPath = $_FILES['file-upload']['tmp_name'];
         $fileName = 'cover' . '_' . basename($_FILES['file-upload']['name']);
         $fileDestination = $uploadDir . $fileName;
+        $realDir = './assets/uploads/' . $fileName;
 
         if (!move_uploaded_file($fileTmpPath, $fileDestination)) {
             echo json_encode(["success" => false, "message" => "Failed to upload file."]);
@@ -51,7 +52,7 @@ try {
         ':title' => $title,
         ':description' => $desc,
         ':price' => $price,
-        ':cover_image' => $fileDestination,
+        ':cover_image' => $realDir,
         ':created_by' => $artist,
         ':updated_by' => $artist,
     ]);
