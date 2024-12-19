@@ -5,10 +5,25 @@
                 MEZIKKA
             </a>
         </div>
-        <nav>
+        <ul class="flex space-x-4">
+            <li><a
+                    class="text-xl hover:text-red-500 transition-all"
+                    href="index?view=library">LIBRARY</a></li>
+            <li><a
+                    class="text-xl hover:text-red-500 transition-all"
+                    href="index?view=about">ABOUT</a></li>
+        </ul>
+        <nav class="flex justify-between">
             <ul class="flex space-x-4">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 2 || $_SESSION['role'] === 1):  ?>
+                            <a
+                                href="index.php?view=upload_album"
+                                class="btn_red mr-5">
+                                UPLOAD
+                            </a>
+                        <?php endif; ?>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1):  ?>
                             <a
                                 href="index.php?view=dashboard"
@@ -19,7 +34,7 @@
                         <a
                             href="index.php?action=logout"
                             class="btn_black">
-                            Log out
+                            LOG OUT
                         </a>
                     </li>
                 <?php else: ?>
@@ -27,14 +42,14 @@
                         <a
                             href="index.php?view=register"
                             class="btn_red">
-                            Sign up
+                            SIGN UP
                         </a>
                     </li>
                     <li>
                         <a
                             href="index.php?view=login"
                             class="btn_black">
-                            Log in
+                            LOG IN
                         </a>
                     </li>
                 <?php endif; ?>
