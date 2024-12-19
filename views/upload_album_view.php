@@ -6,7 +6,7 @@ $stmt = $pdo->query($query);
 
 ?>
 
-<main class="container mx-auto px-4 py-12">
+<main class="container mx-auto p-6">
     <div class="max-w-2xl mx-auto bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden">
         <div class="p-8">
             <h2 class="text-3xl font-bold text-primary-400 mb-6">Upload New Album</h2>

@@ -1,4 +1,4 @@
-<header class=" bg-black text-white shadow-md">
+<header class="bg-black text-white shadow-md absolute top-0 w-full">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center">
             <a href="index.php" class="text-2xl font-bold text-red-500 hover:text-red-400 transition-colors">
@@ -8,10 +8,10 @@
         <ul class="flex space-x-4">
             <li><a
                     class="text-xl hover:text-red-500 transition-all"
-                    href="index?view=library">LIBRARY</a></li>
+                    href="index.php?view=library">LIBRARY</a></li>
             <li><a
                     class="text-xl hover:text-red-500 transition-all"
-                    href="index?view=about">ABOUT</a></li>
+                    href="index.php?view=about">ABOUT</a></li>
         </ul>
         <nav class="flex justify-between">
             <ul class="flex space-x-4">
