@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include './includes/db.php';
 
-$albumsPerPage = 6; 
+$albumsPerPage = 8; 
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $albumsPerPage;
@@ -60,11 +60,11 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
 
 <main class="container mx-auto px-4 py-12">
     <h2 class="text-3xl font-bold text-primary-400 mb-8">Library</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- ALBUMS -->
         <?php foreach ($albums as $album): ?>
             <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1">
-                <img src="<?php echo $album['cover_image'] ?: 'https://via.placeholder.com/400x400'; ?>" alt="Album Cover" class="w-full h-64 object-cover">
+                <img src="<?php echo $album['cover_image'] ?: 'https://via.placeholder.com/400x400'; ?>" alt="Album Cover" class="w-full h-[20rem] object-cover">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-primary-400 mb-2"><?php echo htmlspecialchars($album['title']); ?></h3>
                     <p class="text-gray-300 mb-4"><?php echo htmlspecialchars($album['description']); ?></p>

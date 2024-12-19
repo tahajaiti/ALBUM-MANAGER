@@ -44,9 +44,6 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
         include_once './views/home_view.php';
     }
 
-
-
-
     ?>
 
 
