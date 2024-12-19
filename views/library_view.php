@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 
 include './includes/db.php';
 
-$albumsPerPage = 8; 
+$albumsPerPage = 8;
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $albumsPerPage;
@@ -62,20 +62,24 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
     <h2 class="text-3xl font-bold text-primary-400 mb-8">Library</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- ALBUMS -->
-        <?php foreach ($albums as $album): ?>
-            <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1">
-                <img src="<?php echo $album['cover_image'] ?: 'https://via.placeholder.com/400x400'; ?>" alt="Album Cover" class="w-full h-[20rem] object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-primary-400 mb-2"><?php echo htmlspecialchars($album['title']); ?></h3>
-                    <p class="text-gray-300 mb-4"><?php echo htmlspecialchars($album['description']); ?></p>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm text-gray-400">Genres: <?php echo $album['genres']; ?></span>
-                        <span class="text-lg font-bold text-primary-300">$<?php echo number_format($album['price'], 2); ?></span>
+        <?php if (empty($album)): ?>
+            <h2 class="text-2xl">No albums in the library.</h2>
+        <?php else: ?>
+            <?php foreach ($albums as $album): ?>
+                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <img src="<?php echo $album['cover_image'] ?: 'https://via.placeholder.com/400x400'; ?>" alt="Album Cover" class="w-full h-[20rem] object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-primary-400 mb-2"><?php echo htmlspecialchars($album['title']); ?></h3>
+                        <p class="text-gray-300 mb-4"><?php echo htmlspecialchars($album['description']); ?></p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm text-gray-400">Genres: <?php echo $album['genres']; ?></span>
+                            <span class="text-lg font-bold text-primary-300">$<?php echo number_format($album['price'], 2); ?></span>
+                        </div>
+                        <button data-id="<?php echo $album['id'] ?>" class="btn_red w-full">PURCHASE</button>
                     </div>
-                    <button data-id="<?php echo $album['id'] ?>" class="btn_red w-full">PURCHASE</button>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
 
