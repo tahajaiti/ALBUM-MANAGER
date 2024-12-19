@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] === 3) {
+    header("Location: index.php");
+    exit();
+}
+
 require_once './includes/db.php';
 
 $query = 'SELECT id, name FROM genres ORDER BY name ASC;';

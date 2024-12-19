@@ -6,7 +6,7 @@
 ?>
 
 <section class="w-screen h-screen bg-transparent flex justify-center items-center">
-    <div class="flex flex-col justify-center items-center bg-gray-900 p-8 rounded-sm shadow-lg w-full max-w-md">
+    <div class="flex flex-col justify-center items-center bg-gray-900/50 backdrop-blur-lg p-8 rounded-sm shadow-lg w-full max-w-md">
         <h2 class="text-3xl font-bold mb-6 text-white text-center">Sign Up</h2>
         <form id="registerForm" class="space-y-4" method="POST" action="./index.php?action=register">
             <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">

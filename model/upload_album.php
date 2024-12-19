@@ -28,7 +28,7 @@ try {
     $artist = $_SESSION['user_id'];
 
     if ($_FILES['file-upload']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = './assets/uploads/';
+        $uploadDir = './../assets/uploads/';
 
         $fileTmpPath = $_FILES['file-upload']['tmp_name'];
         $fileName = 'cover' . '_' . basename($_FILES['file-upload']['name']);
