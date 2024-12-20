@@ -22,6 +22,10 @@
   @apply block py-2 px-4 text-gray-400 hover:bg-gray-700/60 backdrop-blur-lg hover:text-white;
 }
 
+.popUp {
+  @apply h-full fixed z-40 w-full left-0 top-0 flex justify-center items-center bg-black/10 backdrop-blur-sm;
+}
+
 body {
   background-image: url('./../assets/bg.webp');
   background-position: center;
