@@ -8,7 +8,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 try {
     if (!isset($data['id'], $data['price'], $_SESSION['user_id'])) {
         http_response_code(400);
-        echo json_encode(['status' => false, 'error' => 'Invalid input data']);
+        echo json_encode(['status' => false, 'message' => 'Invalid input data']);
         exit();
     }
 
@@ -34,6 +34,6 @@ try {
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['status' => false, 'error' => 'Failed to buy album: ' . $e->getMessage()]);
+    echo json_encode(['status' => false, 'message' => 'Failed to buy album: ' . $e->getMessage()]);
     exit();
 }
