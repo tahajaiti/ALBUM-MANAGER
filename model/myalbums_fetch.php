@@ -1,15 +1,10 @@
 <?php
-session_start();
-header('Content-Type: application/json');
-
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] === 3) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized access']);
-    exit();
-}
+include_once '../includes/permission_check.php';
+blockCustomer();
 
 require_once '../includes/db.php';
 
+header('Content-Type: application/json');
 $query = "
     SELECT 
         a.id,

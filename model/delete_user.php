@@ -1,12 +1,6 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
-    http_response_code(403);
-    echo json_encode(["error" => "Unauthorized"]);
-    exit();
-}
+include_once '../includes/permission_check.php';
+checkAdmin();
 
 include_once '../includes/db.php';
 

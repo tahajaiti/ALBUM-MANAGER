@@ -1,16 +1,10 @@
 <?php
-
-session_start();
-header("Content-Type: application/json");
-
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
-    http_response_code(403);
-    echo json_encode(["error" => "Unauthorized"]);
-    exit();
-}
+include_once '../includes/permission_check.php';
+checkAdmin();
 
 require_once '../includes/db.php';
 
+header("Content-Type: application/json");
 
 try {
     $query = "SELECT users.*, roles.role_name AS role

@@ -1,15 +1,10 @@
 <?php
-session_start();
-header("Content-Type: application/json");
-
-// Check if the user is authorized
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 1) {
-    http_response_code(403);
-    echo json_encode(["error" => "Unauthorized"]);
-    exit();
-}
+include_once '../includes/permission_check.php';
+checkAdmin();
 
 require_once '../includes/db.php';
+
+header("Content-Type: application/json");
 
 try {
     $queries = [
