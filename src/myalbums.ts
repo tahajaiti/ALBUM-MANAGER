@@ -12,29 +12,26 @@ interface Album {
     archived: boolean;
 }
 
-
-
-const container = document.getElementById('myAlbumsContainer') as HTMLDivElement;
-const editForm = document.getElementById('editContainer') as HTMLDivElement;
-const form = document.getElementById('editForm') as HTMLFormElement;
+const container = document.getElementById("myAlbumsContainer") as HTMLDivElement;
+const editForm = document.getElementById("editContainer") as HTMLDivElement;
+const form = document.getElementById("editForm") as HTMLFormElement;
 
 const fetchAlbums = async () => {
     try {
-        const data: Album[] = await fetchData('./model/myalbums_fetch.php');
+        const data: Album[] = await fetchData("./model/myalbums_fetch.php");
 
         if (container) {
-            container.innerHTML = '';
+            container.innerHTML = "";
 
             if (!data || data.length === 0) {
                 container.innerHTML = '<p class="text-2xl">No existing albums.</p>';
                 return;
             }
-            
 
-            data.forEach(album => {
-                const newDiv = document.createElement('div');
+            data.forEach((album) => {
+                const newDiv = document.createElement("div");
                 newDiv.className =
-                    'bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1';
+                    "bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1";
                 newDiv.innerHTML = `
                     <img src="${album.cover_image}" alt="Album Cover" class="w-full h-[20rem] object-fit">
                     <div class="p-6">
@@ -51,14 +48,14 @@ const fetchAlbums = async () => {
                     </div>
                 `;
 
-                const deleteBtn = newDiv.querySelector('#deleteAlbum') as HTMLButtonElement;
-                const editBtn = newDiv.querySelector('#editAlbum') as HTMLButtonElement;
+                const deleteBtn = newDiv.querySelector("#deleteAlbum") as HTMLButtonElement;
+                const editBtn = newDiv.querySelector("#editAlbum") as HTMLButtonElement;
 
-                deleteBtn.addEventListener('click', ()=> {
+                deleteBtn.addEventListener("click", () => {
                     deleteAlbum(album.id);
                 });
 
-                editBtn.addEventListener('click', ()=> {
+                editBtn.addEventListener("click", () => {
                     openEdit(album);
                 });
 
@@ -66,16 +63,15 @@ const fetchAlbums = async () => {
             });
         }
     } catch (error) {
-        console.error('Error fetching albums:', error);
-        showAlert('Failed to fetch albums. Please try again later.');
+        console.error("Error fetching albums:", error);
+        showAlert("Failed to fetch albums. Please try again later.");
     }
 };
 
-
 const deleteAlbum = async (id: number) => {
-    const response = await fetch('./model/delete_album.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("./model/delete_album.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ album_id: id }),
     });
 
@@ -85,18 +81,40 @@ const deleteAlbum = async (id: number) => {
         showAlert(result.message);
         fetchAlbums();
     } else {
-        showAlert(result.error || 'An error happened.');
+        showAlert(result.error || "An error happened.");
     }
 };
 
 const openEdit = (album: Album) => {
-    editForm.classList.remove('hidden');
+    const closeBtn = editForm.querySelector("#closeEdit") as HTMLButtonElement;
 
-    const closeBtn = editForm.querySelector('#closeEdit') as HTMLButtonElement;
+    if (editForm && closeBtn) {
+        editForm.classList.remove("hidden");
 
-    closeBtn.addEventListener('click', ()=> {
-        editForm.classList.add('hidden');
-    });
+        closeBtn.addEventListener("click", () => {
+            editForm.classList.add("hidden");
+        });
+
+        const inputs = form.querySelectorAll("input, textarea") as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
+
+        inputs.forEach((input) => {
+            if (input instanceof HTMLInputElement) {
+                switch (input.name) {
+                    case "editId":
+                        input.value = String(album.id);
+                        break;
+                    case "editTitle":
+                        input.value = album.title;
+                        break;
+                    case "editPrice":
+                        input.value = album.price;
+                        break;
+                }
+            } else if (input instanceof HTMLTextAreaElement) {
+                input.value = album.description;
+            }
+        });
+    }
 };
 
-document.addEventListener('DOMContentLoaded', fetchAlbums);
+document.addEventListener("DOMContentLoaded", fetchAlbums);

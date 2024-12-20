@@ -118,7 +118,6 @@ const openEdit = (user: User) => {
                 input.value = user.role;
             }
             console.log(input.value);
-            
         });
     }
 };

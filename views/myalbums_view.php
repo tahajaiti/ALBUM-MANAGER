@@ -30,21 +30,22 @@ $stmt = $pdo->query($query);
             </div>
             <form id="editForm">
                 <div class="space-y-6">
+                    <input type="hidden" name="editId" id="editId">
                     <div>
-                        <label for="album-title" class="block text-sm font-medium text-gray-300 mb-1">Album Title</label>
-                        <input type="text" id="editTitle" name="album-title" class="input-field" required>
+                        <label for="editTitle" class="block text-sm font-medium text-gray-300 mb-1">Album Title</label>
+                        <input type="text" id="editTitle" name="editTitle" class="input-field" required>
                     </div>
                     <div>
-                        <label for="album-price" class="block text-sm font-medium text-gray-300 mb-1">Album Price ($)</label>
-                        <input type="number" id="editPrice" name="album-price" step="0.01" min="0" class="input-field" required>
+                        <label for="editPrice" class="block text-sm font-medium text-gray-300 mb-1">Album Price ($)</label>
+                        <input type="number" id="editPrice" name="editPrice" step="0.01" min="0" class="input-field" required>
                     </div>
                     <div>
-                        <label for="album-description" class="block text-sm font-medium text-gray-300 mb-1">Album Description</label>
-                        <textarea id="editDescription" name="album-description" rows="4" class="input-field" required></textarea>
+                        <label for="editDescription" class="block text-sm font-medium text-gray-300 mb-1">Album Description</label>
+                        <textarea id="editDescription" name="editDescription" rows="4" class="input-field" required></textarea>
                     </div>
                     <div>
-                        <label for="album-genres" class="block text-sm font-medium text-gray-300 mb-1">Album Genre(s)</label>
-                        <select id="editGenres" name="genres[]" class="input-field" multiple required>
+                        <label for="editGenres" class="block text-sm font-medium text-gray-300 mb-1">Album Genre(s)</label>
+                        <select id="editGenres" name="editGenres[]" class="input-field" multiple required>
                             <?php
                             try {
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
