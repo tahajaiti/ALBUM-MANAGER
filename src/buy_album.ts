@@ -10,6 +10,7 @@ interface Album {
     cover_image: string;
     genres: string[];
     archived: boolean;
+    artist_name: string;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,11 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (id) {
             btn.addEventListener("click", async () => {
                 const album = await getAlbum(Number(id.value));
-                
                 if (album) {
-                    console.log(album);
-                }
                     
+                }
                 
             });
         }
@@ -38,7 +37,7 @@ const getAlbum = async (id: number) => {
 
     data.forEach(a => {
         if (a.id === id) {
-            album = a
+            album = a;
         }
     });
 

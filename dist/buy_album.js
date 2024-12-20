@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
                 const album = yield getAlbum(Number(id.value));
                 if (album) {
-                    console.log(album);
                 }
             }));
         }

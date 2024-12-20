@@ -84,23 +84,25 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
     </div>
 
     <!-- Pop-up -->
-    <div id="purchasePopup" class="fixed z-50 top-0 bg-gray-800 bg-opacity-70 backdrop-blur-md rounded-xl shadow-2xl p-8 max-w-md w-full scale-95">
-        <h2 class="text-2xl font-bold text-primary-400 mb-4">Confirm Purchase</h2>
-        <p class="text-gray-300 mb-6">Are you sure you want to buy this album?</p>
-        <div class="flex justify-between items-center mb-4">
-            <div>
-                <h3 class="text-xl font-semibold text-primary-300">Neon Dreams</h3>
-                <p class="text-gray-400">by Electro Harmony</p>
+    <div id="purchasePopup" class="h-full fixed z-40 w-full left-0 top-0 flex justify-center items-center bg-black/10 backdrop-blur-sm">
+        <div  class="bg-gray-800 bg-opacity-70 backdrop-blur-md rounded-xl shadow-2xl p-8 max-w-md w-full scale-95">
+            <h2 class="text-2xl font-bold text-primary-400 mb-4">Confirm Purchase</h2>
+            <p class="text-gray-300 mb-6">Are you sure you want to buy this album?</p>
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h3 class="text-xl font-semibold text-primary-300">Neon Dreams</h3>
+                    <p class="text-gray-400">by Electro Harmony</p>
+                </div>
+                <span class="text-2xl font-bold text-primary-400">$9.99</span>
             </div>
-            <span class="text-2xl font-bold text-primary-400">$9.99</span>
-        </div>
-        <div class="flex space-x-4">
-            <button id="confirmPurchase" class="btn_red flex-1">
-                Confirm
-            </button>
-            <button id="cancelPurchase" class="btn_black flex-1">
-                Cancel
-            </button>
+            <div class="flex space-x-4">
+                <button id="confirmPurchase" class="btn_red flex-1">
+                    Confirm
+                </button>
+                <button id="cancelPurchase" class="btn_black flex-1">
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
 

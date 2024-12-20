@@ -3,7 +3,10 @@
 require_once '../includes/db.php';
 
 try {
-    $query = "SELECT * FROM albums WHERE is_archived = false ORDER BY id ASC;";
+    $query = "SELECT albums.*, users.name as artist_name FROM albums 
+              JOIN users ON albums.artist_id = users.id 
+              WHERE albums.is_archived = false 
+              ORDER BY albums.id ASC;";
 
     $stmt = $pdo->prepare($query);
     $stmt->execute();
