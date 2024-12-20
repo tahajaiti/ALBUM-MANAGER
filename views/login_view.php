@@ -5,7 +5,7 @@
     }
 ?>
 
-<section class="w-screen h-screen bg-transparent flex justify-center items-center">
+<section class="w-screen h-[95%] bg-transparent flex justify-center items-center">
     <div class="flex flex-col justify-center items-center bg-gray-900/50 backdrop-blur-lg p-8 rounded-sm shadow-lg w-full max-w-md">
         <h2 class="text-3xl font-bold mb-6 text-white text-center">Log in</h2>
         <form id="loginForm" class="space-y-4" method="POST" action="./index.php?action=login">

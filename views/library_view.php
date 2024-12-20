@@ -67,7 +67,7 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
         <?php else: ?>
             <?php foreach ($albums as $album): ?>
                 <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1">
-                    <img src="<?php echo $album['cover_image'] ?: 'https://via.placeholder.com/400x400'; ?>" alt="Album Cover" class="w-full h-[20rem] object-cover">
+                    <img src="<?php echo $album['cover_image'] ?: 'https://via.placeholder.com/400x400'; ?>" alt="Album Cover" class="w-full h-[15rem] object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-primary-400 mb-2"><?php echo htmlspecialchars($album['title']); ?></h3>
                         <p class="text-gray-300 mb-4"><?php echo htmlspecialchars($album['description']); ?></p>
