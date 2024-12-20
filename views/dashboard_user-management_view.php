@@ -25,10 +25,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 1) {
         <!-- User Management Section -->
         <section id="user-management" class="mb-12">
             <h2 class="text-3xl font-bold mb-6">User Management</h2>
-            <div class="bg-gray-800 rounded-lg overflow-hidden">
+            <div class="bg-gray-800/50 backdrop-blur-xl rounded-lg overflow-hidden">
                 <table class="w-full">
                     <thead>
-                        <tr class="bg-gray-700">
+                        <tr class="bg-gray-700/50 backdrop-blur-lg">
                             <th class="px-6 py-3 text-left">ID</th>
                             <th class="px-6 py-3 text-left">Name</th>
                             <th class="px-6 py-3 text-left">Email</th>
