@@ -173,4 +173,4 @@ const editAlbum = async (album: FormData) => {
     }
 };
 
-document.addEventListener("DOMContentLoaded", fetchAlbums);
+fetchAlbums();

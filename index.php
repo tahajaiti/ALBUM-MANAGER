@@ -37,13 +37,14 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 
     include_once 'views/header.php';
 
-    if (isset($_GET["view"]) && !empty($_GET["view"])) {
-        $view = $_GET["view"];
-        include_once "views/" . $view . "_view.php";
-    } else {
-        include_once './views/home_view.php';
-    }
+    $view = isset($_GET["view"]) && !empty($_GET["view"]) ? $_GET["view"] : 'home';
+    $viewFile = "views/" . $view . "_view.php";
 
+    if (file_exists($viewFile)) {
+        include_once $viewFile;
+    } else {
+        include_once 'views/404_view.php';
+    }
     ?>
 
 
