@@ -15,6 +15,8 @@ interface Album {
 
 
 const container = document.getElementById('myAlbumsContainer') as HTMLDivElement;
+const editForm = document.getElementById('editContainer') as HTMLDivElement;
+const form = document.getElementById('editForm') as HTMLFormElement;
 
 const fetchAlbums = async () => {
     try {
@@ -43,16 +45,21 @@ const fetchAlbums = async () => {
                             <span class="text-lg font-bold text-primary-300">$${album.price}</span>
                         </div>
                         <div class="flex space-x-2">
-                            <button class="btn_black w-full" aria-label="Edit Album">Edit</button>
+                            <button id="editAlbum" class="btn_black w-full" aria-label="Edit Album">Edit</button>
                             <button id="deleteAlbum" class="btn_red w-full" aria-label="Delete Album">Delete</button>
                         </div>
                     </div>
                 `;
 
                 const deleteBtn = newDiv.querySelector('#deleteAlbum') as HTMLButtonElement;
+                const editBtn = newDiv.querySelector('#editAlbum') as HTMLButtonElement;
 
                 deleteBtn.addEventListener('click', ()=> {
                     deleteAlbum(album.id);
+                });
+
+                editBtn.addEventListener('click', ()=> {
+                    openEdit(album);
                 });
 
                 container.appendChild(newDiv);
@@ -80,6 +87,16 @@ const deleteAlbum = async (id: number) => {
     } else {
         showAlert(result.error || 'An error happened.');
     }
+};
+
+const openEdit = (album: Album) => {
+    editForm.classList.remove('hidden');
+
+    const closeBtn = editForm.querySelector('#closeEdit') as HTMLButtonElement;
+
+    closeBtn.addEventListener('click', ()=> {
+        editForm.classList.add('hidden');
+    });
 };
 
 document.addEventListener('DOMContentLoaded', fetchAlbums);

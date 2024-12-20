@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import fetchData from "./fetch.js";
 import showAlert from "./softAlert.js";
 const container = document.getElementById('myAlbumsContainer');
+const editForm = document.getElementById('editContainer');
+const form = document.getElementById('editForm');
 const fetchAlbums = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield fetchData('./model/myalbums_fetch.php');
@@ -33,14 +35,18 @@ const fetchAlbums = () => __awaiter(void 0, void 0, void 0, function* () {
                             <span class="text-lg font-bold text-primary-300">$${album.price}</span>
                         </div>
                         <div class="flex space-x-2">
-                            <button class="btn_black w-full" aria-label="Edit Album">Edit</button>
+                            <button id="editAlbum" class="btn_black w-full" aria-label="Edit Album">Edit</button>
                             <button id="deleteAlbum" class="btn_red w-full" aria-label="Delete Album">Delete</button>
                         </div>
                     </div>
                 `;
                 const deleteBtn = newDiv.querySelector('#deleteAlbum');
+                const editBtn = newDiv.querySelector('#editAlbum');
                 deleteBtn.addEventListener('click', () => {
                     deleteAlbum(album.id);
+                });
+                editBtn.addEventListener('click', () => {
+                    openEdit(album);
                 });
                 container.appendChild(newDiv);
             });
@@ -66,4 +72,11 @@ const deleteAlbum = (id) => __awaiter(void 0, void 0, void 0, function* () {
         showAlert(result.error || 'An error happened.');
     }
 });
+const openEdit = (album) => {
+    editForm.classList.remove('hidden');
+    const closeBtn = editForm.querySelector('#closeEdit');
+    closeBtn.addEventListener('click', () => {
+        editForm.classList.add('hidden');
+    });
+};
 document.addEventListener('DOMContentLoaded', fetchAlbums);
