@@ -34,7 +34,7 @@ const fetchAlbums = async () => {
                 newDiv.className =
                     'bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1';
                 newDiv.innerHTML = `
-                    <img src="${album.cover_image}" alt="Album Cover" class="w-full h-64 object-cover">
+                    <img src="${album.cover_image}" alt="Album Cover" class="w-full h-[20rem] object-fit">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-primary-400 mb-2">${album.title}</h3>
                         <p class="text-gray-300 mb-4">${album.description}</p>
@@ -63,7 +63,6 @@ const fetchAlbums = async () => {
         showAlert('Failed to fetch albums. Please try again later.');
     }
 };
-
 
 
 const deleteAlbum = async (id: number) => {

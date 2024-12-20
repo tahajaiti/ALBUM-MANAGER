@@ -1,4 +1,4 @@
-<header class="bg-gradient-to-b from-black to-transparent text-white shadow-md absolute top-0 w-full">
+<header class="bg-gradient-to-b from-black to-transparent backdrop-blur-xl z-20 drop-shadow-xl text-white shadow-md absolute top-0 w-full">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center">
             <a href="index.php" class="text-2xl font-bold text-red-500 hover:text-red-400 transition-colors">
