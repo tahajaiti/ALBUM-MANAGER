@@ -1,17 +1,19 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 3) {
-    http_response_code(401); // Unauthorized
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] === 3) {
+    http_response_code(401);
     echo json_encode(['error' => 'Unauthorized access']);
     exit();
 }
 
-require_once './includes/db.php';
+require_once '../includes/db.php';
 
 $query = "
     SELECT 
-        a.id, 
+        a.id,
+        a.artist_id, 
         a.title, 
         a.description, 
         a.price, 
@@ -35,23 +37,23 @@ $query = "
 
 try {
     $stmt = $pdo->prepare($query);
-$stmt->execute([':artist_id' => $_SESSION['user_id']]);
+    $stmt->execute([':artist_id' => $_SESSION['user_id']]);
 
-$albums = [];
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $albums[] = [
-        'id' => $row['id'],
-        'title' => htmlspecialchars($row['title']),
-        'description' => htmlspecialchars($row['description']),
-        'price' => number_format($row['price'], 2),
-        'cover_image' => $row['cover_image'],
-        'genres' => htmlspecialchars($row['genre_names']),
-        'archived' => $row['is_archived'],
-    ];
-}
+    $albums = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $albums[] = [
+            'id' => $row['id'],
+            'artist_Id' => $row['artist_id'],
+            'title' => htmlspecialchars($row['title']),
+            'description' => htmlspecialchars($row['description']),
+            'price' => number_format($row['price'], 2),
+            'cover_image' => $row['cover_image'],
+            'genres' => htmlspecialchars($row['genre_names']),
+            'archived' => $row['is_archived'],
+        ];
+    }
 
-header('Content-Type: application/json');
-echo json_encode($albums);
+    echo json_encode($albums);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["status" => False, "error" => "Error fetching albums: " . $e->getMessage()]);
