@@ -100,4 +100,46 @@ const openEdit = (album) => {
         });
     }
 };
+const decimalRegex = /^\d+(\.\d+)?$/;
+form.addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, function* () {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const price = formData.get('editPrice');
+    const selectedGenres = formData.getAll('editGenres[]');
+    let valid = true;
+    if (!decimalRegex.test(price)) {
+        showAlert('Please enter a valid number');
+        valid = false;
+        return;
+    }
+    if (selectedGenres.length > 3) {
+        showAlert('Please select only 3 genres max.');
+        valid = false;
+        return;
+    }
+    if (valid) {
+        try {
+            yield editAlbum(formData);
+        }
+        catch (error) {
+            showAlert('Failed to edit user. Please try again.');
+        }
+    }
+}));
+const editAlbum = (album) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch('./model/edit_album.php', {
+        method: 'POST',
+        body: album,
+    });
+    const result = yield response.json();
+    if (response.ok && result.status) {
+        editForm.classList.add('hidden');
+        showAlert(result.message);
+        fetchAlbums();
+    }
+    else {
+        editForm.classList.add('hidden');
+        showAlert(result.message);
+    }
+});
 document.addEventListener("DOMContentLoaded", fetchAlbums);

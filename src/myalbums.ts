@@ -12,6 +12,11 @@ interface Album {
     archived: boolean;
 }
 
+interface response {
+    status: boolean;
+    message: string;
+}
+
 const container = document.getElementById("myAlbumsContainer") as HTMLDivElement;
 const editForm = document.getElementById("editContainer") as HTMLDivElement;
 const form = document.getElementById("editForm") as HTMLFormElement;
@@ -114,6 +119,57 @@ const openEdit = (album: Album) => {
                 input.value = album.description;
             }
         });
+    }
+};
+
+const decimalRegex = /^\d+(\.\d+)?$/;
+
+form.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const price = formData.get('editPrice') as string;
+    const selectedGenres = formData.getAll('editGenres[]') as string[];
+
+    let valid = true;
+
+    if (!decimalRegex.test(price)) {
+        showAlert('Please enter a valid number');
+        valid = false;
+        return;
+    }
+
+    if (selectedGenres.length > 3) {
+        showAlert('Please select only 3 genres max.');
+        valid = false;
+        return;
+    }
+
+    if (valid) {
+        try {
+            await editAlbum(formData);
+        } catch (error) {
+            showAlert('Failed to edit user. Please try again.');
+        }
+    }
+
+});
+
+const editAlbum = async (album: FormData) => {
+    const response = await fetch('./model/edit_album.php', {
+        method: 'POST',
+        body: album,
+    });
+
+    const result: response = await response.json();
+
+    if (response.ok && result.status) {
+        editForm.classList.add('hidden');
+        showAlert(result.message);
+        fetchAlbums();
+    } else {
+        editForm.classList.add('hidden');
+        showAlert(result.message);
     }
 };
 
