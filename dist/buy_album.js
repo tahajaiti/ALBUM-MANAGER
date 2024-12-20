@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const confirmPurchase = popUp.querySelector("#confirmPurchase");
                     const cancelPurchase = popUp.querySelector("#cancelPurchase");
                     confirmPurchase.addEventListener("click", () => {
-                        showAlert("Album purchased successfully!");
+                        buyAlbum(album.id, Number(album.price));
                         popUp.remove();
                     });
                     cancelPurchase.addEventListener("click", () => {
@@ -58,4 +58,20 @@ const getAlbum = (id) => __awaiter(void 0, void 0, void 0, function* () {
         }
     });
     return album;
+});
+const buyAlbum = (id, price) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch("./model/buy_album.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id, price })
+    });
+    const result = yield response.json();
+    if (result.status && response.ok) {
+        showAlert("Album purchased successfully!");
+    }
+    else {
+        showAlert("Failed to purchase album. Please try again later.");
+    }
 });

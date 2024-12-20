@@ -20,3 +20,4 @@ const fetchData = async<T> (url: string): Promise<T> => {
 }
 
 export default fetchData;
+

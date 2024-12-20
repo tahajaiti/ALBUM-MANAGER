@@ -51,6 +51,6 @@ try {
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['status' => False, 'error' =>'ZB'. $e->getMessage()]);
+    echo json_encode(['status' => False, 'error' =>'Failed to get the user'. $e->getMessage()]);
     exit;
 }

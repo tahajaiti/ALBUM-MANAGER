@@ -13,6 +13,11 @@ interface Album {
     artist_name: string;
 }
 
+interface response {
+    status: boolean;
+    message: string;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const buyBtn = document.querySelectorAll(".buyBtn") as NodeListOf<HTMLButtonElement>;
 
@@ -44,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const cancelPurchase = popUp.querySelector("#cancelPurchase") as HTMLButtonElement;
 
                     confirmPurchase.addEventListener("click", () => {
-                        showAlert("Album purchased successfully!");
+                        buyAlbum(album.id, Number(album.price));
                         popUp.remove();
                     });
 
@@ -76,3 +81,21 @@ const getAlbum = async (id: number): Promise<Album | null> => {
 
     return album;
 };
+
+const buyAlbum = async (id: number, price: number): Promise<void> => {
+    const response = await fetch("./model/buy_album.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id, price })
+    });
+
+    const result: response = await response.json();
+
+    if (result.status && response.ok) {
+        showAlert("Album purchased successfully!");
+    } else {
+        showAlert("Failed to purchase album. Please try again later.");
+    }
+}
