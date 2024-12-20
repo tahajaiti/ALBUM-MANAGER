@@ -142,4 +142,4 @@ const editAlbum = (album) => __awaiter(void 0, void 0, void 0, function* () {
         showAlert(result.message);
     }
 });
-document.addEventListener("DOMContentLoaded", fetchAlbums);
+fetchAlbums();

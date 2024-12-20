@@ -75,13 +75,34 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
                             <span class="text-sm text-gray-400">Genres: <?php echo $album['genres']; ?></span>
                             <span class="text-lg font-bold text-primary-300">$<?php echo number_format($album['price'], 2); ?></span>
                         </div>
-                        <button data-id="<?php echo $album['id'] ?>" class="btn_red w-full">PURCHASE</button>
+                        <input type="hidden" id="albumId" value="<?php echo $album['id']; ?>">
+                        <button class="buyBtn btn_red w-full">PURCHASE</button>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
 
+    <!-- Pop-up -->
+    <div id="purchasePopup" class="fixed z-50 top-0 bg-gray-800 bg-opacity-70 backdrop-blur-md rounded-xl shadow-2xl p-8 max-w-md w-full scale-95">
+        <h2 class="text-2xl font-bold text-primary-400 mb-4">Confirm Purchase</h2>
+        <p class="text-gray-300 mb-6">Are you sure you want to buy this album?</p>
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h3 class="text-xl font-semibold text-primary-300">Neon Dreams</h3>
+                <p class="text-gray-400">by Electro Harmony</p>
+            </div>
+            <span class="text-2xl font-bold text-primary-400">$9.99</span>
+        </div>
+        <div class="flex space-x-4">
+            <button id="confirmPurchase" class="btn_red flex-1">
+                Confirm
+            </button>
+            <button id="cancelPurchase" class="btn_black flex-1">
+                Cancel
+            </button>
+        </div>
+    </div>
 
     <!-- Pagination -->
     <div class="flex justify-center mt-8">
@@ -105,3 +126,5 @@ $totalPages = ceil($totalAlbums / $albumsPerPage);
         </div>
     </div>
 </main>
+
+<script type="module" src="./dist/buy_album.js"></script>
