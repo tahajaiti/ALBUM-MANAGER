@@ -40,7 +40,7 @@ const fetchAlbums = () => __awaiter(void 0, void 0, void 0, function* () {
                 `;
                 const deleteBtn = newDiv.querySelector('#deleteAlbum');
                 deleteBtn.addEventListener('click', () => {
-                    console.log(album.id);
+                    deleteAlbum(album.id);
                 });
                 container.appendChild(newDiv);
             });
@@ -49,6 +49,21 @@ const fetchAlbums = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         console.error('Error fetching albums:', error);
         showAlert('Failed to fetch albums. Please try again later.');
+    }
+});
+const deleteAlbum = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch('./model/delete_album.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ album_id: id }),
+    });
+    const result = yield response.json();
+    if (response.ok && result.success) {
+        showAlert(result.message);
+        fetchAlbums();
+    }
+    else {
+        showAlert(result.error || 'An error happened.');
     }
 });
 document.addEventListener('DOMContentLoaded', fetchAlbums);

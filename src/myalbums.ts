@@ -52,8 +52,7 @@ const fetchAlbums = async () => {
                 const deleteBtn = newDiv.querySelector('#deleteAlbum') as HTMLButtonElement;
 
                 deleteBtn.addEventListener('click', ()=> {
-                    console.log(album.id);
-                    
+                    deleteAlbum(album.id);
                 });
 
                 container.appendChild(newDiv);
@@ -62,6 +61,25 @@ const fetchAlbums = async () => {
     } catch (error) {
         console.error('Error fetching albums:', error);
         showAlert('Failed to fetch albums. Please try again later.');
+    }
+};
+
+
+
+const deleteAlbum = async (id: number) => {
+    const response = await fetch('./model/delete_album.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ album_id: id }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+        showAlert(result.message);
+        fetchAlbums();
+    } else {
+        showAlert(result.error || 'An error happened.');
     }
 };
 
