@@ -15,9 +15,16 @@ const inputs = {
     active_users: document.getElementById('active_users'),
     archived_users: document.getElementById('archived_users'),
 };
+const albumInputs = {
+    new_albums: document.getElementById('new_albums'),
+    total_albums: document.getElementById('total_albums'),
+    active_albums: document.getElementById('active_albums'),
+    archived_albums: document.getElementById('archived_albums'),
+};
 document.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield fetchData('./model/users_stats.php');
+        const albumData = yield fetchData('./model/album_stats.php');
         if (data) {
             Object.keys(inputs).forEach((key) => {
                 if (data[key]) {
@@ -28,6 +35,17 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, vo
                 }
             });
         }
+        if (albumData) {
+            Object.keys(albumInputs).forEach((key) => {
+                if (albumData[key]) {
+                    albumInputs[key].textContent = albumData[key];
+                }
+                else {
+                    albumInputs[key].textContent = '0';
+                }
+            });
+        }
+        ;
     }
     catch (error) {
         console.error("Error fetching user stats", error);
