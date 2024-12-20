@@ -32,8 +32,8 @@ const fetchUsers = () => __awaiter(void 0, void 0, void 0, function* () {
                                     <td class="px-6 py-4">${(_a = user.updated_by) !== null && _a !== void 0 ? _a : 'No one'}</td>
                                     <td class="px-6 py-4">${user.role}</td>
                                     <td class="px-6 py-4">
-                                        <button data-id=${user.id} id="editBtn" class="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
-                                        <button data-id=${user.id} id="deleteBtn" class="bg-red-600 text-white px-3 py-1 rounded mr-2 hover:bg-red-700">Delete</button>
+                                        <button id="editBtn" class="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
+                                        <button id="deleteBtn" class="bg-red-600 text-white px-3 py-1 rounded mr-2 hover:bg-red-700">Delete</button>
                                     </td>
                              `;
             container.appendChild(newRow);
@@ -41,14 +41,9 @@ const fetchUsers = () => __awaiter(void 0, void 0, void 0, function* () {
             editBtn.addEventListener('click', (e) => {
                 openEdit(user);
             });
-        });
-        const deleteBtns = document.querySelectorAll('#deleteBtn');
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const userId = e.target.dataset.id;
-                if (userId) {
-                    deleteUser(Number(userId));
-                }
+            const deleteBtn = newRow.querySelector('#deleteBtn');
+            deleteBtn.addEventListener('click', (e) => {
+                deleteUser(user.id);
             });
         });
     }

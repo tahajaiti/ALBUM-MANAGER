@@ -56,8 +56,8 @@ const fetchUsers = async () => {
                                     <td class="px-6 py-4">${user.updated_by ?? 'No one'}</td>
                                     <td class="px-6 py-4">${user.role}</td>
                                     <td class="px-6 py-4">
-                                        <button data-id=${user.id} id="editBtn" class="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
-                                        <button data-id=${user.id} id="deleteBtn" class="bg-red-600 text-white px-3 py-1 rounded mr-2 hover:bg-red-700">Delete</button>
+                                        <button id="editBtn" class="bg-blue-600 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
+                                        <button id="deleteBtn" class="bg-red-600 text-white px-3 py-1 rounded mr-2 hover:bg-red-700">Delete</button>
                                     </td>
                              `
             container.appendChild(newRow);
@@ -68,20 +68,13 @@ const fetchUsers = async () => {
                 openEdit(user);
             });
 
-        });
+            const deleteBtn = newRow.querySelector('#deleteBtn') as HTMLButtonElement;
 
-        const deleteBtns = document.querySelectorAll('#deleteBtn') as NodeListOf<HTMLButtonElement>;
-
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const userId = (e.target as HTMLButtonElement).dataset.id;
-
-                if (userId) {
-                    deleteUser(Number(userId));
-                }
+            deleteBtn.addEventListener('click', (e) => {
+                deleteUser(user.id);
             });
-        });
 
+        });
     }
 };
 
