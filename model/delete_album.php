@@ -25,7 +25,7 @@ try {
     $stmt = $pdo->prepare($query);
     $stmt->execute([':ad'=> $artistId, ':album_id' => $aId]);
 
-    echo json_encode(["success" => true, "message" => "Album deleted successfully.", "redirect" => true]);
+    echo json_encode(["success" => true, "message" => "Album deleted successfully.", "redirect" => 'index.php?view=myalbums']);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["status" => false,"error"=> $e->getMessage()]);
