@@ -63,7 +63,7 @@ try {
         ]);
     }
 
-    echo json_encode(["success" => true, "message" => "Album uploaded successfully."]);
+    echo json_encode(["status" => true, "message" => "Album uploaded successfully."]);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(["error" => $e->getMessage()]);

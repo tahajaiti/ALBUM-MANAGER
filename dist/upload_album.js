@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 const result = yield response.json();
                 if (result.status) {
-                    e.preventDefault();
                     showAlert(result.message);
-                    if (result.redirect) {
-                        window.location.href = result.redirect;
+                    if (form instanceof HTMLFormElement) {
+                        console.log(form);
+                        form.reset();
                     }
                 }
                 else {
