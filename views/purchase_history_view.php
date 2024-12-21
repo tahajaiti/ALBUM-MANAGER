@@ -8,14 +8,11 @@
                         <th class="px-6 py-3 text-left">Cover</th>
                         <th class="px-6 py-3 text-left">Title</th>
                         <th class="px-6 py-3 text-left">Purchased At</th>
-                        <th class="px-6 py-3 text-left">Quantity</th>
                         <th class="px-6 py-3 text-left">Price</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                        <td>
-                        <p>No purchases yet.</p>
-                        </td>
+                        
                 </tbody>
             </table>
         </div>
