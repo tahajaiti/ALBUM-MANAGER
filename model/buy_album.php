@@ -12,6 +12,7 @@ try {
         exit();
     }
 
+
     $albumId = $data['id'];
     $price = $data['price'];
     $userId = $_SESSION['user_id'];

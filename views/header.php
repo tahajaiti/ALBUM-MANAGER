@@ -24,21 +24,24 @@
             </li>
         </ul>
         <nav class="flex justify-between">
-            <ul class="flex space-x-4">
+            <ul class="flex items-center space-x-4">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li>
-                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 2 || $_SESSION['role'] === 1):  ?>
+                        <a class="btn_red mr-5 px-3" href="?view=purchase_history">
+                            <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+                        </a>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] !== 3):  ?>
                             <a
                                 href="index.php?view=upload_album"
-                                class="btn_red mr-5">
-                                UPLOAD
+                                class="btn_red mr-5 px-3">
+                                <i class="fa-solid fa-upload text-lg"></i>
                             </a>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1):  ?>
                             <a
                                 href="index.php?view=dashboard"
-                                class="btn_red mr-5">
-                                DASHBOARD
+                                class="btn_red mr-5 px-3">
+                                <i class="fa-brands fa-microsoft text-lg"></i>
                             </a>
                         <?php endif; ?>
                         <a
@@ -46,6 +49,7 @@
                             class="btn_black">
                             LOG OUT
                         </a>
+
                     </li>
                 <?php else: ?>
                     <li>

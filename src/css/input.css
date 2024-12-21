@@ -7,11 +7,11 @@
 }
 
 .btn_red {
-  @apply bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-sm transition-all;
+  @apply bg-red-600 text-center hover:bg-red-700 text-white py-2 px-4 rounded-sm transition-all;
 }
 
 .btn_black {
-  @apply bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-sm transition-colors;
+  @apply bg-gray-800 text-center hover:bg-gray-700 text-white py-2 px-4 rounded-sm transition-colors;
 }
 
 .sub_btn {
@@ -32,4 +32,19 @@ body {
   background-size: cover;
   background-blend-mode: overlay;
 
+}
+
+
+.ic--baseline-list-alt {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M19 5v14H5V5zm1.1-2H3.9c-.5 0-.9.4-.9.9v16.2c0 .4.4.9.9.9h16.2c.4 0 .9-.5.9-.9V3.9c0-.5-.5-.9-.9-.9M11 7h6v2h-6zm0 4h6v2h-6zm0 4h6v2h-6zM7 7h2v2H7zm0 4h2v2H7zm0 4h2v2H7z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
