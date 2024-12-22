@@ -1,7 +1,7 @@
 <?php
 
 include_once '../includes/permission_check.php';
-checkAdmin();
+blockCustomer();
 
 include_once '../includes/db.php';
 

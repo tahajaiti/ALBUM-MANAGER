@@ -11,7 +11,6 @@ if (!isset($_SESSION['token'])) {
 }
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_GET['action']) && $_GET['action'] === 'register') {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -60,12 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userCount = $stmt->fetchColumn();
 
             if ($userCount == 0) {
-                $stmt = $pdo->prepare('INSERT INTO users (role_id, name, email, password, slug) VALUES (:role_id, :name, :email, :password, :slug)');
+                $stmt = $pdo->prepare('INSERT INTO users (role_id, name, email, password, is_accepted, slug) VALUES (:role_id, :name, :email, :password,:is_accepted , :slug)');
                 $stmt->execute([
                     ':role_id' => 1,
                     ':name' => $name,
                     ':email' => $email,
                     ':password' => $hashPass,
+                    ':is_accepted' => true,
                     ':slug' => $slug,
                 ]);
             } else {
