@@ -1,7 +1,7 @@
 # Mezikka
 
 **Description**  
-Mezikka is a web application designed to support independent artists by providing a platform to upload and showcase their music. Built with React and TypeScript for a dynamic, responsive front-end experience, and Laravel for the back-end API. This project aims to provide a Spotify-like service for artists outside the mainstream music industry.
+Mezikka is a web application designed to support independent artists by providing a platform to upload and showcase their music. Built TypeScript for a dynamic, responsive front-end experience, and PHP for the back-end API. This project aims to provide a Spotify-like service for artists outside the mainstream music industry.
 
 ## Features
 - Artist and listener user roles with specific permissions.
