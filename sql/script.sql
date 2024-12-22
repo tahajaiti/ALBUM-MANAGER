@@ -1,5 +1,4 @@
 
-
 -- Table: Roles
 CREATE TABLE Roles (
     id SERIAL PRIMARY KEY,
