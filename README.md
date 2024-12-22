@@ -25,7 +25,7 @@ git clone https://github.com/Youcode-Classe-E-2024-2025/TAHA-JAITI-MANAGER.git
 
 cd TAHA-JAITI-MANAGER
 ```
-Do npm install to install the dependencies
+- Do npm install to install the dependencies
 ```bash
 npm install
 ```
